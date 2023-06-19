@@ -1,98 +1,29 @@
 paths:
-  /products:
-    post:
-      description: Admin create new products
-      summary: create products
+  /products/:ID:
+    patch:
+      description: Admin update one products
+      summary: update products
       tags:
         - products
       servers:
-        - url: http://baseUrl/products
+        - url: http://baseUrl/products/:id
       x-code-samples:
         - lang: cURL
           source: |
-            curl --location --request POST 'http://baseUrl/products' \
-            --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6...' \
-            --form 'name="ali"' \
-            --form 'price="12255"' \
-            --form 'discount="2212"' \
-            --form 'quantity="222"' \
-            --form 'category="6468fc1a51c4a34f8138d14a"' \
-            --form 'customProperty[0][type]="file"' \
-            --form 'customProperty[0][label]="do"' \
-            --form 'customProperty[0][value]="image.jpg"' \
-            --form 'product=@"/home/ali/Downloads/image-removebg-preview.png"' \
-            --form 'attach=@"/home/ali/Downloads/image.jpg"' \
-            --form 'attach=@"/home/ali/Downloads/Clipboard - March 14, 2022 11_00 AM.png"' \
-            --form 'attach=@"/home/ali/Downloads/Clipboard - March 14, 2022 11_00 AM (1).png"' \
-            --form 'additionals=@"/home/ali/Downloads/IMG_20220111_155331.jpg"' \
-            --form 'additionals=@"/home/ali/Downloads/IMG_20211223_080715.jpg"' \
-            --form 'customProperty[1][type]="string"' \
-            --form 'customProperty[1][label]="labtop 457"' \
-            --form 'customProperty[1][value]="585"'
+            curl --location --request PATCH 'http://baseUrl/products/649075bde2058388fd97dadb' \
+            --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR...' \
+            --form 'quantity="10000"'
         - lang: node.js
           source: |
             var request = require('request');
-            var fs = require('fs');
             var options = {
-              'method': 'POST',
-              'url': 'http://baseUrl/products',
+              'method': 'PATCH',
+              'url': 'http://baseUrl/products/649075bde2058388fd97dadb',
               'headers': {
-                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6...'
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR...'
               },
               formData: {
-                'name': 'ali',
-                'price': '12255',
-                'discount': '2212',
-                'quantity': '222',
-                'category': '6468fc1a51c4a34f8138d14a',
-                'customProperty[0][type]': 'file',
-                'customProperty[0][label]': 'do',
-                'customProperty[0][value]': 'image.jpg',
-                'product': {
-                  'value': fs.createReadStream('/home/ali/Downloads/image-removebg-preview.png'),
-                  'options': {
-                    'filename': 'image-removebg-preview.png',
-                    'contentType': null
-                  }
-                },
-                'attach': {
-                  'value': fs.createReadStream('/home/ali/Downloads/image.jpg'),
-                  'options': {
-                    'filename': 'image.jpg',
-                    'contentType': null
-                  }
-                },
-                'attach': {
-                  'value': fs.createReadStream('/home/ali/Downloads/Clipboard - March 14, 2022 11_00 AM.png'),
-                  'options': {
-                    'filename': 'Clipboard - March 14, 2022 11_00 AM.png',
-                    'contentType': null
-                  }
-                },
-                'attach': {
-                  'value': fs.createReadStream('/home/ali/Downloads/Clipboard - March 14, 2022 11_00 AM (1).png'),
-                  'options': {
-                    'filename': 'Clipboard - March 14, 2022 11_00 AM (1).png',
-                    'contentType': null
-                  }
-                },
-                'additionals': {
-                  'value': fs.createReadStream('/home/ali/Downloads/IMG_20220111_155331.jpg'),
-                  'options': {
-                    'filename': 'IMG_20220111_155331.jpg',
-                    'contentType': null
-                  }
-                },
-                'additionals': {
-                  'value': fs.createReadStream('/home/ali/Downloads/IMG_20211223_080715.jpg'),
-                  'options': {
-                    'filename': 'IMG_20211223_080715.jpg',
-                    'contentType': null
-                  }
-                },
-                'customProperty[1][type]': 'string',
-                'customProperty[1][label]': 'labtop 457',
-                'customProperty[1][value]': '585'
+                'quantity': '10000'
               }
             };
             request(options, function (error, response) {
@@ -100,11 +31,15 @@ paths:
               console.log(response.body);
             });
 
-
       parameters:
         - name: auth
           in: header
           description: an authorization header
+          required: true
+          type: string
+        - name: id
+          in: path
+          description: product id
           required: true
           type: string
 
@@ -113,12 +48,6 @@ paths:
           multipart/form-data:
             schema: 
               type: object
-              required:
-                  - name
-                  - price
-                  - quantity
-                  - category
-                  - product
               properties: 
                 name:
                   type: string
@@ -183,7 +112,7 @@ paths:
                   example: honey1.jpg
                   description: <div> additionals image for product maximum number 4 file </div>
       responses:
-        "201":
+        "200":
           description: ok
           content:
             application/json:
