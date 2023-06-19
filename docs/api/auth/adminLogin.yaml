@@ -6,7 +6,7 @@ paths:
       tags:
         - auth
       servers:
-        - url: http://baseUrl//auth-admin/login
+        - url: http://baseUrl
       x-code-samples:
         - lang: cURL
           source: |

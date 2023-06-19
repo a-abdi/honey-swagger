@@ -6,7 +6,7 @@ paths:
       tags:
         - admins
       servers:
-        - url: http://baseUrl/admins
+        - url: http://baseUrl
       x-code-samples:
         - lang: cURL
           source: |

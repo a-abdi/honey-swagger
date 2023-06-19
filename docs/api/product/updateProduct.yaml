@@ -1,12 +1,12 @@
 paths:
-  /products/:ID:
+  /products/:id:
     patch:
       description: Admin update one products
       summary: update products
       tags:
         - products
       servers:
-        - url: http://baseUrl/products/:id
+        - url: http://baseUrl
       x-code-samples:
         - lang: cURL
           source: |

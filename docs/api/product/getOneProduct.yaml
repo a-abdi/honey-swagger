@@ -6,7 +6,7 @@ paths:
       tags:
         - products
       servers:
-        - url: http://baseUrl/products/:id
+        - url: http://baseUrl
       x-code-samples:
         - lang: cURL
           source: |

@@ -6,7 +6,7 @@ paths:
       tags:
         - categories
       servers:
-        - url: http://baseUrl/categories
+        - url: http://baseUrl
       x-code-samples:
         - lang: cURL
           source: |
