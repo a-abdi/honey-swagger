@@ -131,7 +131,7 @@ paths:
                 customProperty:
                   type: array
                   description: custom property for product
-                  properties:
+                  items: 
                     type: object
                     required:
                       - label

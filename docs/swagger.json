@@ -2040,7 +2040,7 @@
                   "customProperty": {
                     "type": "array",
                     "description": "custom property for product",
-                    "properties": {
+                    "items": {
                       "type": "object",
                       "required": [
                         "label",
@@ -2185,15 +2185,618 @@
                         "category": "6468fc1a51c4a34f8138d14a",
                         "discount": 2212,
                         "productImagesSrc": [
-                          "http://localhost:3000/upload/product/457b8fe1-bf36-40e1-a9e9-9c4447bfa6e1.png"
+                          "http://baseUrl/upload/product/457b8fe1-bf36-40e1-a9e9-9c4447bfa6e1.png"
                         ],
                         "additionalsImageSrc": [
-                          "http://localhost:3000/upload/product/a53d83ee-1f03-4be0-85c2-11c98fa88035.jpg",
-                          "http://localhost:3000/upload/product/c1a56a3e-63fd-45ca-b304-e501a43b3a23.jpg"
+                          "http://baseUrl/upload/product/a53d83ee-1f03-4be0-85c2-11c98fa88035.jpg",
+                          "http://baseUrl/upload/product/c1a56a3e-63fd-45ca-b304-e501a43b3a23.jpg"
                         ],
                         "customProperty": [
                           {
-                            "value": "http://localhost:3000/upload/product/c1a56a3e-63fd-45ca-b304-e501a43b3a23.jpg",
+                            "value": "http://baseUrl/upload/product/c1a56a3e-63fd-45ca-b304-e501a43b3a23.jpg",
+                            "label": "آزمایش",
+                            "type": "file"
+                          },
+                          {
+                            "value": "8",
+                            "label": "ساکارز",
+                            "type": "number"
+                          }
+                        ],
+                        "deletedAt": false,
+                        "_id": "649070f8e3ab58f71dfa0a90",
+                        "createdAt": "2023-06-19T15:15:04.923Z",
+                        "updatedAt": "2023-06-19T15:15:04.923Z",
+                        "__v": 0
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "array",
+                      "example": [
+                        "نام باید به صورت حروف وارد شود"
+                      ]
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "example": "bad request"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unauthorized"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 401
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Forbidden resource"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 403
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Not Found"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Cannot Patch /admins/xxxxxxxxxxx"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 404
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internet Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Internal server error"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 500
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Get all product",
+        "summary": "Get All product",
+        "tags": [
+          "products"
+        ],
+        "servers": [
+          {
+            "url": "http://baseUrl/products"
+          }
+        ],
+        "x-code-samples": [
+          {
+            "lang": "cURL",
+            "source": "curl --location --request GET 'http://localhost:3000/products'\n"
+          },
+          {
+            "lang": "node.js",
+            "source": "var request = require('request');\nvar options = {\n  'method': 'GET',\n  'url': 'http://localhost:3000/products',\n  'headers': {\n  }\n};\nrequest(options, function (error, response) {\n  if (error) throw new Error(error);\n  console.log(response.body);\n});\n"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "description": "filter product by category id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "sort products by sort number",
+            "required": false,
+            "type": "intiger"
+          },
+          {
+            "name": "deletedAt",
+            "in": "query",
+            "description": "filter product by deletedAt",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "درخواست انجام شد"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "category": {
+                            "type": "string"
+                          },
+                          "price": {
+                            "type": "string"
+                          },
+                          "discount": {
+                            "type": "string"
+                          },
+                          "quantity": {
+                            "type": "string"
+                          },
+                          "code": {
+                            "type": "string"
+                          },
+                          "productImagesSrc": {
+                            "type": "array"
+                          },
+                          "additionalsImageSrc": {
+                            "type": "array"
+                          },
+                          "customProperty": {
+                            "type": "array"
+                          },
+                          "createdAt": {
+                            "type": "string"
+                          },
+                          "updatedAt": {
+                            "type": "string"
+                          },
+                          "__v": {
+                            "type": "number"
+                          }
+                        }
+                      },
+                      "example": [
+                        {
+                          "name": "ali",
+                          "price": 12255,
+                          "quantity": 222,
+                          "code": "d20pgbv",
+                          "admin": "63ec02f7cf392f67c0ad6f0c",
+                          "category": "6468fc1a51c4a34f8138d14a",
+                          "discount": 2212,
+                          "productImagesSrc": [
+                            "http://baseUrl/upload/product/457b8fe1-bf36-40e1-a9e9-9c4447bfa6e1.png"
+                          ],
+                          "additionalsImageSrc": [
+                            "http://baseUrl/upload/product/a53d83ee-1f03-4be0-85c2-11c98fa88035.jpg",
+                            "http://baseUrl/upload/product/c1a56a3e-63fd-45ca-b304-e501a43b3a23.jpg"
+                          ],
+                          "customProperty": [
+                            {
+                              "value": "http://baseUrl/upload/product/c1a56a3e-63fd-45ca-b304-e501a43b3a23.jpg",
+                              "label": "آزمایش",
+                              "type": "file"
+                            },
+                            {
+                              "value": "8",
+                              "label": "ساکارز",
+                              "type": "number"
+                            }
+                          ],
+                          "deletedAt": false,
+                          "_id": "649070f8e3ab58f71dfa0a90",
+                          "createdAt": "2023-06-19T15:15:04.923Z",
+                          "updatedAt": "2023-06-19T15:15:04.923Z",
+                          "__v": 0
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "array",
+                      "example": [
+                        "مرتب سازی به درستی وارد نشده است"
+                      ]
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "example": "bad request"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unauthorized"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 401
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Forbidden resource"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 403
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Not Found"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Cannot Patch /admins/xxxxxxxxxxx"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 404
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internet Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Internal server error"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 500
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/:ID": {
+      "patch": {
+        "description": "Admin update one products",
+        "summary": "update products",
+        "tags": [
+          "products"
+        ],
+        "servers": [
+          {
+            "url": "http://baseUrl/products/:id"
+          }
+        ],
+        "x-code-samples": [
+          {
+            "lang": "cURL",
+            "source": "curl --location --request PATCH 'http://baseUrl/products/649075bde2058388fd97dadb' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR...' \\\n--form 'quantity=\"10000\"'\n"
+          },
+          {
+            "lang": "node.js",
+            "source": "var request = require('request');\nvar options = {\n  'method': 'PATCH',\n  'url': 'http://baseUrl/products/649075bde2058388fd97dadb',\n  'headers': {\n    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR...'\n  },\n  formData: {\n    'quantity': '10000'\n  }\n};\nrequest(options, function (error, response) {\n  if (error) throw new Error(error);\n  console.log(response.body);\n});\n"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "auth",
+            "in": "header",
+            "description": "an authorization header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "product id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "عسل طبیعی",
+                    "description": "<div> product name </div>"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "<div> product description </div>",
+                    "example": "وسایل مورد نیاز در زنبورداری بسیار متنوع می باشند که بسته به مرحله زنبورداری متفاوت است."
+                  },
+                  "customProperty": {
+                    "type": "array",
+                    "description": "custom property for product",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "label",
+                        "type"
+                      ],
+                      "properties": {
+                        "label": {
+                          "type": "string",
+                          "description": "<div> product label for add new custom property </div>",
+                          "example": "وزن"
+                        },
+                        "value": {
+                          "type": [
+                            "string",
+                            "integer"
+                          ],
+                          "description": "<div> product value for add new custom property </div>",
+                          "example": 1000
+                        },
+                        "unit": {
+                          "type": "string",
+                          "description": "<div> unit for new property </div>",
+                          "example": "کیلوگرم"
+                        },
+                        "type": {
+                          "type": "string",
+                          "description": "<div> if import type file shoud send file and fill value with file origin name </div>",
+                          "enum": [
+                            "file",
+                            "text",
+                            "number"
+                          ],
+                          "example": "file"
+                        }
+                      }
+                    }
+                  },
+                  "price": {
+                    "type": "integer",
+                    "description": "<div> product price </div>",
+                    "example": 1000
+                  },
+                  "discount": {
+                    "type": "integer",
+                    "description": "<div> product discount </div>",
+                    "example": 200
+                  },
+                  "quantity": {
+                    "type": "integer",
+                    "description": "<div> product quantity </div>",
+                    "example": 5000
+                  },
+                  "category": {
+                    "type": "string",
+                    "description": "<div> product category </div>",
+                    "example": "لوازم زنبور داری"
+                  },
+                  "product": {
+                    "type": "file",
+                    "example": "honey.jpg",
+                    "description": "<div> product main images must be one file </div>"
+                  },
+                  "attach": {
+                    "type": "file",
+                    "example": "attach.jpg",
+                    "description": "<div> if in custom property choose type file shoud send atach file maximum number 4 file </div>"
+                  },
+                  "additionals": {
+                    "type": "file",
+                    "example": "honey1.jpg",
+                    "description": "<div> additionals image for product maximum number 4 file </div>"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "درخواست انجام شد"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "category": {
+                          "type": "string"
+                        },
+                        "price": {
+                          "type": "string"
+                        },
+                        "discount": {
+                          "type": "string"
+                        },
+                        "quantity": {
+                          "type": "string"
+                        },
+                        "code": {
+                          "type": "string"
+                        },
+                        "productImagesSrc": {
+                          "type": "array"
+                        },
+                        "additionalsImageSrc": {
+                          "type": "array"
+                        },
+                        "customProperty": {
+                          "type": "array"
+                        },
+                        "createdAt": {
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "type": "string"
+                        },
+                        "__v": {
+                          "type": "number"
+                        }
+                      },
+                      "example": {
+                        "name": "ali",
+                        "price": 12255,
+                        "quantity": 222,
+                        "code": "d20pgbv",
+                        "admin": "63ec02f7cf392f67c0ad6f0c",
+                        "category": "6468fc1a51c4a34f8138d14a",
+                        "discount": 2212,
+                        "productImagesSrc": [
+                          "http://baseUrl/upload/product/457b8fe1-bf36-40e1-a9e9-9c4447bfa6e1.png"
+                        ],
+                        "additionalsImageSrc": [
+                          "http://baseUrl/upload/product/a53d83ee-1f03-4be0-85c2-11c98fa88035.jpg",
+                          "http://baseUrl/upload/product/c1a56a3e-63fd-45ca-b304-e501a43b3a23.jpg"
+                        ],
+                        "customProperty": [
+                          {
+                            "value": "http://baseUrl/upload/product/c1a56a3e-63fd-45ca-b304-e501a43b3a23.jpg",
                             "label": "آزمایش",
                             "type": "file"
                           },
