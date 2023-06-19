@@ -29,7 +29,8 @@
         "admins",
         "auth",
         "categories",
-        "products"
+        "products",
+        "users"
       ]
     }
   ]

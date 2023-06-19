@@ -1,0 +1,254 @@
+paths:
+  /users:
+    patch:
+      description: Update user information by self
+      summary: Update user
+      tags:
+        - users
+      servers:
+        - url: http://baseUrl
+      x-code-samples:
+        - lang: cURL
+          source: |
+            curl --location --request PATCH 'http://baseUrl/users' \
+            --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR..' \
+            --header 'Content-Type: application/json' \
+            --data-raw '{
+                "name": "test",
+                "address": {
+                    "city": "فسا",
+                    "province": "فارس",
+                    "plaque": "1",
+                    "postalAddress": "sds sds sdss sdsd",
+                    "selected": true,
+                    "postalCode": "6553698556",
+                    "recipient": {
+                        "firstName": "محمد",
+                        "lastName": "عبدی",
+                        "phoneNumber": "09394502418"
+                    }
+                }
+            }'
+        - lang: node.js
+          source: |
+            var request = require('request');
+            var options = {
+              'method': 'PATCH',
+              'url': 'http://baseUrl/users',
+              'headers': {
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR..',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                "name": "test",
+                "address": {
+                  "city": "فسا",
+                  "province": "فارس",
+                  "plaque": "1",
+                  "postalAddress": "sds sds sdss sdsd",
+                  "selected": true,
+                  "postalCode": "6553698556",
+                  "recipient": {
+                    "firstName": "محمد",
+                    "lastName": "عبدی",
+                    "phoneNumber": "09394502418"
+                  }
+                }
+              })
+
+            };
+            request(options, function (error, response) {
+              if (error) throw new Error(error);
+              console.log(response.body);
+            });
+      parameters:
+        - name: auth
+          in: header
+          description: an authorization header
+          required: true
+          type: string
+
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              type: object
+              properties:
+                firstName: 
+                  type: string
+                lastName: 
+                  type: string
+                address: 
+                  type: object  
+                  properties:
+                    postalAddress: 
+                      type: string
+                    province: 
+                      type: string
+                    city: 
+                      type: string
+                    plaque: 
+                      type: string
+                    recipient: 
+                      type: object
+                      properties:
+                        firstName: 
+                          type: string
+                        lastName: 
+                          type: string
+                        phoneNumber: 
+                          type: string
+                    postalCode: 
+                      type: string
+          
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "درخواست انجام شد"
+                  data:
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                      phoneNumber: 
+                        type: string
+                      createdAt: 
+                        type: string
+                      updatedAt: 
+                        type: string
+                      __v: 
+                        type: number
+                      address: 
+                        type: object  
+                        properties:
+                          postalAddress: 
+                            type: string
+                          province: 
+                            type: string
+                          city: 
+                            type: string
+                          plaque: 
+                            type: string
+                          recipient: 
+                            type: object
+                            properties:
+                              firstName: 
+                                type: string
+                              lastName: 
+                                type: string
+                              phoneNumber: 
+                                type: string
+                          postalCode: 
+                            type: string
+                      firstName: 
+                        type: string
+                      lastName: 
+                        type: string
+                    example: [
+                      "_id": "64724cba6666c49e972a846c",
+                      "phoneNumber": "+989394552776",
+                      "createdAt": "2023-05-27T18:32:26.660Z",
+                      "updatedAt": "2023-06-04T20:57:22.642Z",
+                      "__v": 0,
+                      "address": {
+                          "postalAddress": "استان فارس - شهرستان فسا - بخش ششده و قره بلاا عبدی",
+                          "province": "البرز",
+                          "city": "چهارباغ",
+                          "plaque": "256",
+                          "recipient": {
+                              "firstName": "محمد",
+                              "lastName": "عبدی",
+                              "phoneNumber": "+989363658879"
+                          },
+                          "postalCode": "7466135566"
+                      },
+                      "firstName": "علی",
+                      "lastName": "عبدی"
+                    ]
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: array
+                    items:
+                      type: string
+                    example: [
+                      "نام به درستی وارد نشده است"
+                    ]
+                  statusCode: 
+                    type: string
+                    example: 400
+                  error:
+                    type: string
+                    example: bad request
+
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Unauthorized"
+                  statusCode: 
+                    type: string
+                    example: 401
+        
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Forbidden resource"
+                  statusCode: 
+                    type: string
+                    example: 403
+
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "Not Found"
+                  message:
+                    type: string
+                    example: "Cannot GET /invalid-address"
+                  statusCode: 
+                    type: string
+                    example: 404
+
+        "500":
+          description: Internet Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Internal server error"
+                  statusCode: 
+                    type: string
+                    example: 500
+

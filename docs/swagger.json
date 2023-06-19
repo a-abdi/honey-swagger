@@ -26,7 +26,8 @@
         "admins",
         "auth",
         "categories",
-        "products"
+        "products",
+        "users"
       ]
     }
   ],
@@ -648,8 +649,7 @@
         ],
         "servers": [
           {
-            "url": "http://baseUrl",
-            "description": "Production server"
+            "url": "http://baseUrl"
           }
         ],
         "x-code-samples": [
@@ -3334,6 +3334,1716 @@
                     "message": {
                       "type": "string",
                       "example": "Cannot Patch /admins/xxxxxxxxxxx"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 404
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internet Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Internal server error"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 500
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/:id/restore": {
+      "get": {
+        "description": "Safe delete one products",
+        "summary": "Safe delete",
+        "tags": [
+          "products"
+        ],
+        "servers": [
+          {
+            "url": "http://baseUrl"
+          }
+        ],
+        "x-code-samples": [
+          {
+            "lang": "cURL",
+            "source": "curl --location --request PATCH 'http://baseUrl/products/64803778cee36139e6931c9f/restore' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI...'\n"
+          },
+          {
+            "lang": "node.js",
+            "source": "var request = require('request');\nvar options = {\n  'method': 'PATCH',\n  'url': 'http://baseUrl/products/64803778cee36139e6931c9f/restore',\n  'headers': {\n    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI...'\n  }\n};\nrequest(options, function (error, response) {\n  if (error) throw new Error(error);\n  console.log(response.body);\n});\n"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "product id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "درخواست انجام شد"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "category": {
+                          "type": "string"
+                        },
+                        "price": {
+                          "type": "string"
+                        },
+                        "discount": {
+                          "type": "string"
+                        },
+                        "quantity": {
+                          "type": "string"
+                        },
+                        "code": {
+                          "type": "string"
+                        },
+                        "productImagesSrc": {
+                          "type": "array"
+                        },
+                        "additionalsImageSrc": {
+                          "type": "array"
+                        },
+                        "customProperty": {
+                          "type": "array"
+                        },
+                        "createdAt": {
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "type": "string"
+                        },
+                        "__v": {
+                          "type": "number"
+                        }
+                      },
+                      "example": {
+                        "name": "ali",
+                        "price": 12255,
+                        "quantity": 222,
+                        "code": "d20pgbv",
+                        "admin": "63ec02f7cf392f67c0ad6f0c",
+                        "category": "6468fc1a51c4a34f8138d14a",
+                        "discount": 2212,
+                        "productImagesSrc": [
+                          "http://baseUrl/upload/product/457b8fe1-bf36-40e1-a9e9-9c4447bfa6e1.png"
+                        ],
+                        "additionalsImageSrc": [
+                          "http://baseUrl/upload/product/a53d83ee-1f03-4be0-85c2-11c98fa88035.jpg",
+                          "http://baseUrl/upload/product/c1a56a3e-63fd-45ca-b304-e501a43b3a23.jpg"
+                        ],
+                        "customProperty": [
+                          {
+                            "value": "http://baseUrl/upload/product/c1a56a3e-63fd-45ca-b304-e501a43b3a23.jpg",
+                            "label": "آزمایش",
+                            "type": "file"
+                          },
+                          {
+                            "value": "8",
+                            "label": "ساکارز",
+                            "type": "number"
+                          }
+                        ],
+                        "deletedAt": false,
+                        "_id": "649070f8e3ab58f71dfa0a90",
+                        "createdAt": "2023-06-19T15:15:04.923Z",
+                        "updatedAt": "2023-06-19T15:15:04.923Z",
+                        "__v": 0
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "example": [
+                        "شناسه به درستی وارد نشده است"
+                      ]
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "example": "bad request"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Not Found"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Cannot Patch /admins/xxxxxxxxxxx"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 404
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internet Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Internal server error"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 500
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/:id/safe-delete": {
+      "get": {
+        "description": "Safe delete one products",
+        "summary": "Safe delete",
+        "tags": [
+          "products"
+        ],
+        "servers": [
+          {
+            "url": "http://baseUrl"
+          }
+        ],
+        "x-code-samples": [
+          {
+            "lang": "cURL",
+            "source": "curl --location --request PATCH 'http://baseUrl/products/64803778cee36139e6931c9f/safe-delete' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI...'\n"
+          },
+          {
+            "lang": "node.js",
+            "source": "var request = require('request');\nvar options = {\n  'method': 'PATCH',\n  'url': 'http://baseUrl/products/64803778cee36139e6931c9f/safe-delete',\n  'headers': {\n    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI...'\n  }\n};\nrequest(options, function (error, response) {\n  if (error) throw new Error(error);\n  console.log(response.body);\n});\n"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "product id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "درخواست انجام شد"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "category": {
+                          "type": "string"
+                        },
+                        "price": {
+                          "type": "string"
+                        },
+                        "discount": {
+                          "type": "string"
+                        },
+                        "quantity": {
+                          "type": "string"
+                        },
+                        "code": {
+                          "type": "string"
+                        },
+                        "productImagesSrc": {
+                          "type": "array"
+                        },
+                        "additionalsImageSrc": {
+                          "type": "array"
+                        },
+                        "customProperty": {
+                          "type": "array"
+                        },
+                        "createdAt": {
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "type": "string"
+                        },
+                        "__v": {
+                          "type": "number"
+                        }
+                      },
+                      "example": {
+                        "name": "ali",
+                        "price": 12255,
+                        "quantity": 222,
+                        "code": "d20pgbv",
+                        "admin": "63ec02f7cf392f67c0ad6f0c",
+                        "category": "6468fc1a51c4a34f8138d14a",
+                        "discount": 2212,
+                        "productImagesSrc": [
+                          "http://baseUrl/upload/product/457b8fe1-bf36-40e1-a9e9-9c4447bfa6e1.png"
+                        ],
+                        "additionalsImageSrc": [
+                          "http://baseUrl/upload/product/a53d83ee-1f03-4be0-85c2-11c98fa88035.jpg",
+                          "http://baseUrl/upload/product/c1a56a3e-63fd-45ca-b304-e501a43b3a23.jpg"
+                        ],
+                        "customProperty": [
+                          {
+                            "value": "http://baseUrl/upload/product/c1a56a3e-63fd-45ca-b304-e501a43b3a23.jpg",
+                            "label": "آزمایش",
+                            "type": "file"
+                          },
+                          {
+                            "value": "8",
+                            "label": "ساکارز",
+                            "type": "number"
+                          }
+                        ],
+                        "deletedAt": false,
+                        "_id": "649070f8e3ab58f71dfa0a90",
+                        "createdAt": "2023-06-19T15:15:04.923Z",
+                        "updatedAt": "2023-06-19T15:15:04.923Z",
+                        "__v": 0
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "example": [
+                        "شناسه به درستی وارد نشده است"
+                      ]
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "example": "bad request"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Not Found"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Cannot Patch /admins/xxxxxxxxxxx"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 404
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internet Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Internal server error"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 500
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "description": "Signup user",
+        "summary": "Signup user",
+        "tags": [
+          "users"
+        ],
+        "servers": [
+          {
+            "url": "http://baseUrl"
+          }
+        ],
+        "x-code-samples": [
+          {
+            "lang": "cURL",
+            "source": "curl --location --request POST 'http://baseUrl/users' \\\n--header 'Content-Type: application/json' \\\n--data-raw '{\n    \"phoneNumber\": \"09390870928\",\n    \"password\": \"!QAZ1qaz\",\n    \"passwordConfirm\": \"!QAZ1qaz\"\n}'\n"
+          },
+          {
+            "lang": "node.js",
+            "source": "var request = require('request');\nvar options = {\n  'method': 'POST',\n  'url': 'http://baseUrl/users',\n  'headers': {\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    \"phoneNumber\": \"09390870928\",\n    \"password\": \"!QAZ1qaz\",\n    \"passwordConfirm\": \"!QAZ1qaz\"\n  })\n\n};\nrequest(options, function (error, response) {\n  if (error) throw new Error(error);\n  console.log(response.body);\n});\n"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "phoneNumber",
+                  "password",
+                  "passwordConfirm"
+                ],
+                "properties": {
+                  "phoneNumber": {
+                    "type": "string",
+                    "example": "09394552776"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "!QAZ1qaz"
+                  },
+                  "passwordConfirm": {
+                    "type": "string",
+                    "example": "!QAZ1qaz"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "درخواست انجام شد"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string"
+                        },
+                        "phoneNumber": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "type": "string"
+                        },
+                        "__v": {
+                          "type": "number"
+                        }
+                      },
+                      "example": {
+                        "phoneNumber": "+989390870918",
+                        "_id": "6490b21d23a1fac82a69c72a",
+                        "createdAt": "2023-06-19T19:53:01.605Z",
+                        "updatedAt": "2023-06-19T19:53:01.605Z",
+                        "__v": 0
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "example": [
+                        "شماره موبایل در سیستم وجود دارد"
+                      ]
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "example": "bad request"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Not Found"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Cannot Patch /invalid-adress"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 404
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internet Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Internal server error"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 500
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Get all users by Admin",
+        "summary": "Get users",
+        "tags": [
+          "users"
+        ],
+        "servers": [
+          {
+            "url": "http://baseUrl"
+          }
+        ],
+        "x-code-samples": [
+          {
+            "lang": "cURL",
+            "source": "curl --location --request GET 'http://baseUrl/users' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI...'\n"
+          },
+          {
+            "lang": "node.js",
+            "source": "var request = require('request');\nvar options = {\n  'method': 'GET',\n  'url': 'http://baseUrl/users',\n  'headers': {\n    'Authorization': 'Bearer eyJhbGciOiJIUzI...'\n  }\n};\nrequest(options, function (error, response) {\n  if (error) throw new Error(error);\n  console.log(response.body);\n});\n"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "auth",
+            "in": "header",
+            "description": "an authorization header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "درخواست انجام شد"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string"
+                          },
+                          "phoneNumber": {
+                            "type": "string"
+                          },
+                          "createdAt": {
+                            "type": "string"
+                          },
+                          "updatedAt": {
+                            "type": "string"
+                          },
+                          "__v": {
+                            "type": "number"
+                          },
+                          "address": {
+                            "type": "object",
+                            "properties": {
+                              "postalAddress": {
+                                "type": "string"
+                              },
+                              "province": {
+                                "type": "string"
+                              },
+                              "city": {
+                                "type": "string"
+                              },
+                              "plaque": {
+                                "type": "string"
+                              },
+                              "recipient": {
+                                "type": "object",
+                                "properties": {
+                                  "firstName": {
+                                    "type": "string"
+                                  },
+                                  "lastName": {
+                                    "type": "string"
+                                  },
+                                  "phoneNumber": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "postalCode": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "firstName": {
+                            "type": "string"
+                          },
+                          "lastName": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "example": [
+                        {
+                          "_id": "64724cba6666c49e972a846c",
+                          "phoneNumber": "+989394552776",
+                          "createdAt": "2023-05-27T18:32:26.660Z",
+                          "updatedAt": "2023-06-04T20:57:22.642Z",
+                          "__v": 0,
+                          "address": {
+                            "postalAddress": "استان فارس - شهرستان فسا - بخش ششده و قره بلاغ-ا ",
+                            "province": "البرز",
+                            "city": "چهارباغ",
+                            "plaque": "256",
+                            "recipient": {
+                              "firstName": "محمد",
+                              "lastName": "عبدی",
+                              "phoneNumber": "+989363658879"
+                            },
+                            "postalCode": "7466135566"
+                          },
+                          "firstName": "علی",
+                          "lastName": "عبدی"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unauthorized"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 401
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Forbidden resource"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 403
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Not Found"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Cannot GET /invalid-address"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 404
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internet Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Internal server error"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 500
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "description": "Update user information by self",
+        "summary": "Update user",
+        "tags": [
+          "users"
+        ],
+        "servers": [
+          {
+            "url": "http://baseUrl"
+          }
+        ],
+        "x-code-samples": [
+          {
+            "lang": "cURL",
+            "source": "curl --location --request PATCH 'http://baseUrl/users' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR..' \\\n--header 'Content-Type: application/json' \\\n--data-raw '{\n    \"name\": \"test\",\n    \"address\": {\n        \"city\": \"فسا\",\n        \"province\": \"فارس\",\n        \"plaque\": \"1\",\n        \"postalAddress\": \"sds sds sdss sdsd\",\n        \"selected\": true,\n        \"postalCode\": \"6553698556\",\n        \"recipient\": {\n            \"firstName\": \"محمد\",\n            \"lastName\": \"عبدی\",\n            \"phoneNumber\": \"09394502418\"\n        }\n    }\n}'\n"
+          },
+          {
+            "lang": "node.js",
+            "source": "var request = require('request');\nvar options = {\n  'method': 'PATCH',\n  'url': 'http://baseUrl/users',\n  'headers': {\n    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR..',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    \"name\": \"test\",\n    \"address\": {\n      \"city\": \"فسا\",\n      \"province\": \"فارس\",\n      \"plaque\": \"1\",\n      \"postalAddress\": \"sds sds sdss sdsd\",\n      \"selected\": true,\n      \"postalCode\": \"6553698556\",\n      \"recipient\": {\n        \"firstName\": \"محمد\",\n        \"lastName\": \"عبدی\",\n        \"phoneNumber\": \"09394502418\"\n      }\n    }\n  })\n\n};\nrequest(options, function (error, response) {\n  if (error) throw new Error(error);\n  console.log(response.body);\n});\n"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "auth",
+            "in": "header",
+            "description": "an authorization header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "firstName": {
+                    "type": "string"
+                  },
+                  "lastName": {
+                    "type": "string"
+                  },
+                  "address": {
+                    "type": "object",
+                    "properties": {
+                      "postalAddress": {
+                        "type": "string"
+                      },
+                      "province": {
+                        "type": "string"
+                      },
+                      "city": {
+                        "type": "string"
+                      },
+                      "plaque": {
+                        "type": "string"
+                      },
+                      "recipient": {
+                        "type": "object",
+                        "properties": {
+                          "firstName": {
+                            "type": "string"
+                          },
+                          "lastName": {
+                            "type": "string"
+                          },
+                          "phoneNumber": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "postalCode": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "درخواست انجام شد"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string"
+                        },
+                        "phoneNumber": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "type": "string"
+                        },
+                        "__v": {
+                          "type": "number"
+                        },
+                        "address": {
+                          "type": "object",
+                          "properties": {
+                            "postalAddress": {
+                              "type": "string"
+                            },
+                            "province": {
+                              "type": "string"
+                            },
+                            "city": {
+                              "type": "string"
+                            },
+                            "plaque": {
+                              "type": "string"
+                            },
+                            "recipient": {
+                              "type": "object",
+                              "properties": {
+                                "firstName": {
+                                  "type": "string"
+                                },
+                                "lastName": {
+                                  "type": "string"
+                                },
+                                "phoneNumber": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "postalCode": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "firstName": {
+                          "type": "string"
+                        },
+                        "lastName": {
+                          "type": "string"
+                        }
+                      },
+                      "example": [
+                        {
+                          "_id": "64724cba6666c49e972a846c"
+                        },
+                        {
+                          "phoneNumber": "+989394552776"
+                        },
+                        {
+                          "createdAt": "2023-05-27T18:32:26.660Z"
+                        },
+                        {
+                          "updatedAt": "2023-06-04T20:57:22.642Z"
+                        },
+                        {
+                          "__v": 0
+                        },
+                        {
+                          "address": {
+                            "postalAddress": "استان فارس - شهرستان فسا - بخش ششده و قره بلاا عبدی",
+                            "province": "البرز",
+                            "city": "چهارباغ",
+                            "plaque": "256",
+                            "recipient": {
+                              "firstName": "محمد",
+                              "lastName": "عبدی",
+                              "phoneNumber": "+989363658879"
+                            },
+                            "postalCode": "7466135566"
+                          }
+                        },
+                        {
+                          "firstName": "علی"
+                        },
+                        {
+                          "lastName": "عبدی"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "example": [
+                        "نام به درستی وارد نشده است"
+                      ]
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "example": "bad request"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unauthorized"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 401
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Forbidden resource"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 403
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Not Found"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Cannot GET /invalid-address"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 404
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internet Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Internal server error"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 500
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/:id": {
+      "delete": {
+        "description": "Delete user by admin",
+        "summary": "Delete user",
+        "tags": [
+          "users"
+        ],
+        "servers": [
+          {
+            "url": "http://baseUrl"
+          }
+        ],
+        "x-code-samples": [
+          {
+            "lang": "cURL",
+            "source": "curl --location --request DELETE 'http://baseUrl/users/6490b21d23a1fac82a69c72a' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUz...'\n"
+          },
+          {
+            "lang": "node.js",
+            "source": "var request = require('request');\nvar options = {\n  'method': 'DELETE',\n  'url': 'http://baseUrl/users/6490b21d23a1fac82a69c72a',\n  'headers': {\n    'Authorization': 'Bearer eyJhbGciOiJIUz...'\n  }\n};\nrequest(options, function (error, response) {\n  if (error) throw new Error(error);\n  console.log(response.body);\n});\n"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "user id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "auth",
+            "in": "header",
+            "description": "an authorization header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "درخواست انجام شد"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string"
+                        },
+                        "phoneNumber": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "type": "string"
+                        },
+                        "__v": {
+                          "type": "number"
+                        }
+                      },
+                      "example": {
+                        "_id": "6490b21d23a1fac82a69c72a",
+                        "phoneNumber": "+989390870918",
+                        "createdAt": "2023-06-19T19:53:01.605Z",
+                        "updatedAt": "2023-06-19T19:53:01.605Z",
+                        "__v": 0
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "example": [
+                        "آیدی به درستی وارد نشده است"
+                      ]
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "example": "bad request"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unauthorized"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 401
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Forbidden resource"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 403
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Not Found"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Cannot GET /invalid-address"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 404
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internet Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Internal server error"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 500
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/info": {
+      "get": {
+        "description": "Get user information by self",
+        "summary": "Get user",
+        "tags": [
+          "users"
+        ],
+        "servers": [
+          {
+            "url": "http://baseUrl"
+          }
+        ],
+        "x-code-samples": [
+          {
+            "lang": "cURL",
+            "source": "curl --location --request GET 'http://baseUrl/users/info' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI...'\n"
+          },
+          {
+            "lang": "node.js",
+            "source": "var request = require('request');\nvar options = {\n  'method': 'GET',\n  'url': 'http://baseUrl/users/info',\n  'headers': {\n    'Authorization': 'Bearer eyJhbGciOiJIUzI...'\n  }\n};\nrequest(options, function (error, response) {\n  if (error) throw new Error(error);\n  console.log(response.body);\n});\n"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "auth",
+            "in": "header",
+            "description": "an authorization header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "درخواست انجام شد"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string"
+                        },
+                        "phoneNumber": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "type": "string"
+                        },
+                        "__v": {
+                          "type": "number"
+                        },
+                        "address": {
+                          "type": "object",
+                          "properties": {
+                            "postalAddress": {
+                              "type": "string"
+                            },
+                            "province": {
+                              "type": "string"
+                            },
+                            "city": {
+                              "type": "string"
+                            },
+                            "plaque": {
+                              "type": "string"
+                            },
+                            "recipient": {
+                              "type": "object",
+                              "properties": {
+                                "firstName": {
+                                  "type": "string"
+                                },
+                                "lastName": {
+                                  "type": "string"
+                                },
+                                "phoneNumber": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "postalCode": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "firstName": {
+                          "type": "string"
+                        },
+                        "lastName": {
+                          "type": "string"
+                        }
+                      },
+                      "example": {
+                        "_id": "64724cba6666c49e972a846c",
+                        "phoneNumber": "+989394552776",
+                        "createdAt": "2023-05-27T18:32:26.660Z",
+                        "updatedAt": "2023-06-04T20:57:22.642Z",
+                        "__v": 0,
+                        "address": {
+                          "postalAddress": "استان فارس - شهرستان فسا - بخش ششده و قره بلاا عبدی",
+                          "province": "البرز",
+                          "city": "چهارباغ",
+                          "plaque": "256",
+                          "recipient": {
+                            "firstName": "محمد",
+                            "lastName": "عبدی",
+                            "phoneNumber": "+989363658879"
+                          },
+                          "postalCode": "7466135566"
+                        },
+                        "firstName": "علی",
+                        "lastName": "عبدی"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unauthorized"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 401
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Forbidden resource"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 403
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Not Found"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Cannot GET /invalid-address"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 404
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internet Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Internal server error"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 500
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/password": {
+      "patch": {
+        "description": "Update user password by self",
+        "summary": "Update user password",
+        "tags": [
+          "users"
+        ],
+        "servers": [
+          {
+            "url": "http://baseUrl"
+          }
+        ],
+        "x-code-samples": [
+          {
+            "lang": "cURL",
+            "source": "curl --location --request PATCH 'http://baseUrl/users/password' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1Ni...' \\\n--header 'Content-Type: application/json' \\\n--data-raw '{\n    \"password\": \"!QAZ1qaz\",\n    \"newPassword\": \"!QAZ1qaz\",\n    \"newPasswordConfirm\": \"!QAZ1qaz\"\n}'\n"
+          },
+          {
+            "lang": "node.js",
+            "source": "var request = require('request');\nvar options = {\n  'method': 'PATCH',\n  'url': 'http://baseUrl/users/password',\n  'headers': {\n    'Authorization': 'Bearer eyJhbGciOiJIUzI1Ni...',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    \"password\": \"!QAZ1qaz\",\n    \"newPassword\": \"!QAZ1qaz\",\n    \"newPasswordConfirm\": \"!QAZ1qaz\"\n  })\n\n};\nrequest(options, function (error, response) {\n  if (error) throw new Error(error);\n  console.log(response.body);\n});\n"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "auth",
+            "in": "header",
+            "description": "an authorization header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "password",
+                  "newPassword",
+                  "newPasswordConfirm"
+                ],
+                "properties": {
+                  "password": {
+                    "type": "string"
+                  },
+                  "newPassword": {
+                    "type": "string"
+                  },
+                  "newPasswordConfirm": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "درخواست انجام شد"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "example": [
+                        "پسورد به درستی وارد نشده است"
+                      ]
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "example": "bad request"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unauthorized"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 401
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Forbidden resource"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 403
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Not Found"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Cannot GET /invalid-address"
                     },
                     "statusCode": {
                       "type": "string",

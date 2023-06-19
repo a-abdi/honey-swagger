@@ -1,0 +1,144 @@
+paths:
+  /users:
+    post:
+      description: Signup user
+      summary: Signup user
+      tags:
+        - users
+      servers:
+        - url: http://baseUrl
+      x-code-samples:
+        - lang: cURL
+          source: |
+            curl --location --request POST 'http://baseUrl/users' \
+            --header 'Content-Type: application/json' \
+            --data-raw '{
+                "phoneNumber": "09390870928",
+                "password": "!QAZ1qaz",
+                "passwordConfirm": "!QAZ1qaz"
+            }'
+        - lang: node.js
+          source: |
+            var request = require('request');
+            var options = {
+              'method': 'POST',
+              'url': 'http://baseUrl/users',
+              'headers': {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                "phoneNumber": "09390870928",
+                "password": "!QAZ1qaz",
+                "passwordConfirm": "!QAZ1qaz"
+              })
+
+            };
+            request(options, function (error, response) {
+              if (error) throw new Error(error);
+              console.log(response.body);
+            });
+
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              type: object
+              required:
+                  - phoneNumber
+                  - password
+                  - passwordConfirm
+              properties: 
+                phoneNumber:
+                  type: string
+                  example: 09394552776
+                password:
+                  type: string
+                  example: "!QAZ1qaz"
+                passwordConfirm:
+                  type: string
+                  example: "!QAZ1qaz"
+
+      responses:
+        "201":
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "درخواست انجام شد"
+                  data:
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                      phoneNumber:
+                        type: string
+                      createdAt:
+                        type: string
+                      updatedAt:
+                        type: string
+                      __v: 
+                        type: number
+                    example: 
+                      {
+                        "phoneNumber": "+989390870918",
+                        "_id": "6490b21d23a1fac82a69c72a",
+                        "createdAt": "2023-06-19T19:53:01.605Z",
+                        "updatedAt": "2023-06-19T19:53:01.605Z",
+                        "__v": 0
+                    }
+                    
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: array
+                    items:
+                      type: string
+                    example: [
+                      "شماره موبایل در سیستم وجود دارد"
+                    ]
+                  statusCode: 
+                    type: string
+                    example: 400
+                  error:
+                    type: string
+                    example: bad request
+
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "Not Found"
+                  message:
+                    type: string
+                    example: "Cannot Patch /invalid-adress"
+                  statusCode: 
+                    type: string
+                    example: 404
+        "500":
+          description: Internet Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Internal server error"
+                  statusCode: 
+                    type: string
+                    example: 500
+
