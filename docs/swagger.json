@@ -1,0 +1,219 @@
+{
+  "info": {
+    "title": "Honey Backend",
+    "version": "0.0.1",
+    "description": "Honey Backend",
+    "x-logo": {
+      "url": "../docs/honey.png"
+    }
+  },
+  "host": "baseUrl",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/app",
+  "securityDefinitions": {
+    "Auth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "authorization"
+    }
+  },
+  "x-tagGroups": [
+    {
+      "name": "ai service",
+      "tags": [
+        "admin"
+      ]
+    }
+  ],
+  "swagger": "2.0",
+  "paths": {
+    "/admins": {
+      "get": {
+        "description": "get all admins list",
+        "summary": "get admins",
+        "tags": [
+          "admin"
+        ],
+        "servers": [
+          {
+            "url": "http://localhost:3000/admins",
+            "description": "Production server"
+          }
+        ],
+        "x-code-samples": [
+          {
+            "lang": "cURL",
+            "source": "curl --location --request GET 'http://localhost:3000/admins' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZU51bW....'\n"
+          },
+          {
+            "lang": "node.js",
+            "source": "var request = require('request');\nvar options = {\n  'method': 'GET',\n  'url': 'http://localhost:3000/admins',\n  'headers': {\n    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZU51bW....'\n  }\n};\nrequest(options, function (error, response) {\n  if (error) throw new Error(error);\n  console.log(response.body);\n});\n"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "auth",
+            "in": "header",
+            "description": "an authorization header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "درخواست انجام شد"
+                    },
+                    "data": {
+                      "type": "array",
+                      "properties": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string"
+                          },
+                          "firstName": {
+                            "type": "string"
+                          },
+                          "lastName": {
+                            "type": "string"
+                          },
+                          "phoneNumber": {
+                            "type": "string"
+                          },
+                          "__v": {
+                            "type": "number"
+                          }
+                        },
+                        "example": {
+                          "_id": "63e571e83e46dfa3902bedc3",
+                          "firstName": "al",
+                          "lastName": "abdi",
+                          "phoneNumber": "+989394552776",
+                          "__v": 0
+                        }
+                      },
+                      "example": [
+                        {
+                          "_id": "63e571e83e46dfa3902bedc3",
+                          "firstName": "ali",
+                          "lastName": "abdi",
+                          "phoneNumber": "+989394552776",
+                          "__v": 0
+                        },
+                        {
+                          "_id": "63e573a0295e4222cf307fe4",
+                          "firstName": "mohammd",
+                          "lastName": "abdi",
+                          "phoneNumber": "+989394552775",
+                          "__v": 0
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unauthorized"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 401
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Forbidden resource"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 403
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Not Found"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Cannot GET /admins/xxxxxxxxxxx"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 404
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internet Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Internal server error"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 500
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {},
+  "responses": {},
+  "parameters": {},
+  "tags": []
+}

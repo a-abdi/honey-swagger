@@ -1,0 +1,19 @@
+{
+  "name": "honey-backend",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon index.js",
+    "swagger": "./node_modules/.bin/swagger-jsdoc -d swagger.config.json -o docs/swagger.json"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "cross-env": "^7.0.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2",
+    "swagger-jsdoc": "^4.0.0"
+  }
+}

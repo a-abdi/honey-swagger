@@ -1,0 +1,33 @@
+{
+  "info": {
+    "title": "Honey Backend",
+    "version": "0.0.1",
+    "description": "Honey Backend",
+    "x-logo": {
+      "url": "../docs/honey.png"
+    }
+  },
+  "host": "baseUrl",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/app",
+  "apis": [
+    "docs/api/*/*.yaml"
+  ],
+  "securityDefinitions": {
+    "Auth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "authorization"
+    }
+  },
+  "x-tagGroups": [
+    {
+      "name": "ai service",
+      "tags": [
+        "admin"
+      ]
+    }
+  ]
+}
