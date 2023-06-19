@@ -1,5 +1,5 @@
 paths:
-  /products/:id/safe-delete:
+  /products/:id/restore:
     get:
       description: Safe delete one products
       summary: Safe delete
@@ -10,14 +10,14 @@ paths:
       x-code-samples:
         - lang: cURL
           source: |
-            curl --location --request PATCH 'http://baseUrl/products/64803778cee36139e6931c9f/safe-delete' \
+            curl --location --request PATCH 'http://baseUrl/products/64803778cee36139e6931c9f/restore' \
             --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI...'
         - lang: node.js
           source: |
             var request = require('request');
             var options = {
               'method': 'PATCH',
-              'url': 'http://baseUrl/products/64803778cee36139e6931c9f/safe-delete',
+              'url': 'http://baseUrl/products/64803778cee36139e6931c9f/restore',
               'headers': {
                 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI...'
               }
