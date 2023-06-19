@@ -1,39 +1,37 @@
 paths:
-  /categories:
-    post:
-      description: Admin create new categgory
-      summary: create category
+  /categories/:id:
+    patch:
+      description: Admin update one categgory
+      summary: update category
       tags:
         - categories
       servers:
-        - url: http://baseUrl/categories
+        - url: http://baseUrl/categories/:id
       x-code-samples:
         - lang: cURL
           source: |
-            curl --location --request POST 'http://baseUrl/categories' \
-            --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG...' \
+            curl --location --request PATCH 'http://baseUrl/categories/646fa78d8bfe8d1617ab556b' \
+            --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9........' \
             --header 'Content-Type: application/json' \
             --data-raw '{
-                "name": "checl",
-                "description": "this is book category",
-                "properties": ["6468b16b801b654457284967"]
+                "name": "عسل",
+                "createdAt": "2024-01-25T07:41:10.921Z",
+                "__v": 2
             }'
         - lang: node.js
           source: |
             var request = require('request');
             var options = {
-              'method': 'POST',
-              'url': 'http://baseUrl/categories',
+              'method': 'PATCH',
+              'url': 'http://baseUrl/categories/646fa78d8bfe8d1617ab556b',
               'headers': {
-                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG...',
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9........',
                 'Content-Type': 'application/json'
               },
               body: JSON.stringify({
-                "name": "checl",
-                "description": "this is book category",
-                "properties": [
-                  "6468b16b801b654457284967"
-                ]
+                "name": "عسل",
+                "createdAt": "2024-01-25T07:41:10.921Z",
+                "__v": 2
               })
 
             };
@@ -43,6 +41,12 @@ paths:
             });
 
       parameters:
+        - name: id
+          in: path
+          description: category id
+          required: true
+          type: string
+
         - name: auth
           in: header
           description: an authorization header
@@ -54,10 +58,6 @@ paths:
           application/json:
             schema: 
               type: object
-              required:
-                  - name
-                  - description
-                  - properties
               properties: 
                 name:
                   type: string
@@ -71,7 +71,7 @@ paths:
                   example: ["6468b16b801b654457284967"]
 
       responses:
-        "201":
+        "200":
           description: ok
           content:
             application/json:
@@ -98,17 +98,17 @@ paths:
                         type: string
                       __v: 
                         type: number
-                    example: 
-                      name: "book"
-                      description: "this is book category"
-                      properties: [
-                        "6468b16b801b654457284967"
-                      ]
-                      _id: "64904fa356a4782b667dccad"
-                      createdAt: "2023-06-19T12:52:51.023Z"
-                      updatedAt: "2023-06-19T12:52:51.023Z"
-                      __v: 0
-                    
+                    example:  {
+                      "_id": "64904fa356a4782b667dccad",
+                      "name": "book",
+                      "description": "this is book category",
+                      "properties": [
+                          "6468b16b801b654457284967"
+                      ],
+                      "createdAt": "2023-06-19T12:52:51.023Z",
+                      "updatedAt": "2023-06-19T12:52:51.023Z",
+                      "__v": 0
+                    }
         "400":
           description: Bad Request
           content:
@@ -119,9 +119,7 @@ paths:
                   message:
                     type: array
                     example: [
-                      "نام باید به صورت حروف وارد شود",
-                      "نام نباید بیشتر از 50 حرف باشد",
-                      "نام نباید کمتر از 3 حرف باشد"
+                        "نام در سیستم وجود دارد"
                     ]
                   statusCode: 
                     type: string
