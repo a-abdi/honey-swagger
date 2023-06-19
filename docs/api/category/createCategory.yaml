@@ -57,7 +57,6 @@ paths:
               required:
                   - name
                   - description
-                  - properties
               properties: 
                 name:
                   type: string

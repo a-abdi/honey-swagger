@@ -1,0 +1,338 @@
+paths:
+  /products:
+    post:
+      description: Admin create new products
+      summary: create products
+      tags:
+        - products
+      servers:
+        - url: http://baseUrl/products
+      x-code-samples:
+        - lang: cURL
+          source: |
+            curl --location --request POST 'http://baseUrl/products' \
+            --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6...' \
+            --form 'name="ali"' \
+            --form 'price="12255"' \
+            --form 'discount="2212"' \
+            --form 'quantity="222"' \
+            --form 'category="6468fc1a51c4a34f8138d14a"' \
+            --form 'customProperty[0][type]="file"' \
+            --form 'customProperty[0][label]="do"' \
+            --form 'customProperty[0][value]="image.jpg"' \
+            --form 'product=@"/home/ali/Downloads/image-removebg-preview.png"' \
+            --form 'attach=@"/home/ali/Downloads/image.jpg"' \
+            --form 'attach=@"/home/ali/Downloads/Clipboard - March 14, 2022 11_00 AM.png"' \
+            --form 'attach=@"/home/ali/Downloads/Clipboard - March 14, 2022 11_00 AM (1).png"' \
+            --form 'additionals=@"/home/ali/Downloads/IMG_20220111_155331.jpg"' \
+            --form 'additionals=@"/home/ali/Downloads/IMG_20211223_080715.jpg"' \
+            --form 'customProperty[1][type]="string"' \
+            --form 'customProperty[1][label]="labtop 457"' \
+            --form 'customProperty[1][value]="585"'
+        - lang: node.js
+          source: |
+            var request = require('request');
+            var fs = require('fs');
+            var options = {
+              'method': 'POST',
+              'url': 'http://baseUrl/products',
+              'headers': {
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6...'
+              },
+              formData: {
+                'name': 'ali',
+                'price': '12255',
+                'discount': '2212',
+                'quantity': '222',
+                'category': '6468fc1a51c4a34f8138d14a',
+                'customProperty[0][type]': 'file',
+                'customProperty[0][label]': 'do',
+                'customProperty[0][value]': 'image.jpg',
+                'product': {
+                  'value': fs.createReadStream('/home/ali/Downloads/image-removebg-preview.png'),
+                  'options': {
+                    'filename': 'image-removebg-preview.png',
+                    'contentType': null
+                  }
+                },
+                'attach': {
+                  'value': fs.createReadStream('/home/ali/Downloads/image.jpg'),
+                  'options': {
+                    'filename': 'image.jpg',
+                    'contentType': null
+                  }
+                },
+                'attach': {
+                  'value': fs.createReadStream('/home/ali/Downloads/Clipboard - March 14, 2022 11_00 AM.png'),
+                  'options': {
+                    'filename': 'Clipboard - March 14, 2022 11_00 AM.png',
+                    'contentType': null
+                  }
+                },
+                'attach': {
+                  'value': fs.createReadStream('/home/ali/Downloads/Clipboard - March 14, 2022 11_00 AM (1).png'),
+                  'options': {
+                    'filename': 'Clipboard - March 14, 2022 11_00 AM (1).png',
+                    'contentType': null
+                  }
+                },
+                'additionals': {
+                  'value': fs.createReadStream('/home/ali/Downloads/IMG_20220111_155331.jpg'),
+                  'options': {
+                    'filename': 'IMG_20220111_155331.jpg',
+                    'contentType': null
+                  }
+                },
+                'additionals': {
+                  'value': fs.createReadStream('/home/ali/Downloads/IMG_20211223_080715.jpg'),
+                  'options': {
+                    'filename': 'IMG_20211223_080715.jpg',
+                    'contentType': null
+                  }
+                },
+                'customProperty[1][type]': 'string',
+                'customProperty[1][label]': 'labtop 457',
+                'customProperty[1][value]': '585'
+              }
+            };
+            request(options, function (error, response) {
+              if (error) throw new Error(error);
+              console.log(response.body);
+            });
+
+
+      parameters:
+        - name: auth
+          in: header
+          description: an authorization header
+          required: true
+          type: string
+
+      requestBody:
+        content:
+          multipart/form-data:
+            schema: 
+              type: object
+              required:
+                  - name
+                  - price
+                  - quantity
+                  - category
+                  - product
+              properties: 
+                name:
+                  type: string
+                  example: عسل طبیعی
+                  description: <div> product name </div>
+                description:
+                  type: string
+                  description: <div> product description </div>
+                  example: وسایل مورد نیاز در زنبورداری بسیار متنوع می باشند که بسته به مرحله زنبورداری متفاوت است.
+                customProperty:
+                  type: array
+                  description: custom property for product
+                  properties:
+                    type: object
+                    required:
+                      - label
+                      - type
+                    properties:
+                      label:
+                        type: string
+                        description: <div> product label for add new custom property </div>
+                        example: وزن
+                      value:
+                        type: [string, integer]
+                        description: <div> product value for add new custom property </div>
+                        example: 1000
+                      unit: 
+                        type: string
+                        description: <div> unit for new property </div>
+                        example: کیلوگرم
+                      type: 
+                        type: string
+                        description: <div> if import type file shoud send file and fill value with file origin name </div>
+                        enum: [file, text, number]
+                        example: file
+                price:
+                  type: integer
+                  description: <div> product price </div>
+                  example: 1000
+                discount: 
+                  type: integer
+                  description: <div> product discount </div>
+                  example: 200
+                quantity: 
+                  type: integer
+                  description: <div> product quantity </div>
+                  example: 5000
+                category:
+                  type: string
+                  description: <div> product category </div>
+                  example: لوازم زنبور داری
+                product:
+                  type: file
+                  example: honey.jpg
+                  description: <div> product main images must be one file </div>
+                attach:
+                  type: file
+                  example: attach.jpg
+                  description: <div> if in custom property choose type file shoud send atach file maximum number 4 file </div>
+                additionals:
+                  type: file
+                  example: honey1.jpg
+                  description: <div> additionals image for product maximum number 4 file </div>
+      responses:
+        "201":
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "درخواست انجام شد"
+                  data:
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                      name:
+                        type: string
+                      description:
+                        type: string
+                      category: 
+                        type: string
+                      price: 
+                        type: string
+                      discount: 
+                        type: string
+                      quantity: 
+                        type: string
+                      code: 
+                        type: string
+                      productImagesSrc: 
+                        type: array
+                      additionalsImageSrc:
+                        type: array
+                      customProperty:
+                        type: array
+                      createdAt:
+                        type: string
+                      updatedAt:
+                        type: string
+                      __v: 
+                        type: number
+                    example: 
+                      {
+                        "name": "ali",
+                        "price": 12255,
+                        "quantity": 222,
+                        "code": "d20pgbv",
+                        "admin": "63ec02f7cf392f67c0ad6f0c",
+                        "category": "6468fc1a51c4a34f8138d14a",
+                        "discount": 2212,
+                        "productImagesSrc": [
+                            "http://localhost:3000/upload/product/457b8fe1-bf36-40e1-a9e9-9c4447bfa6e1.png"
+                        ],
+                        "additionalsImageSrc": [
+                            "http://localhost:3000/upload/product/a53d83ee-1f03-4be0-85c2-11c98fa88035.jpg",
+                            "http://localhost:3000/upload/product/c1a56a3e-63fd-45ca-b304-e501a43b3a23.jpg"
+                        ],
+                        "customProperty": [
+                            {
+                                "value": "http://localhost:3000/upload/product/c1a56a3e-63fd-45ca-b304-e501a43b3a23.jpg",
+                                "label": "آزمایش",
+                                "type": "file"
+                            },
+                            {
+                                "value": "8",
+                                "label": "ساکارز",
+                                "type": "number"
+                            }
+                        ],
+                        "deletedAt": false,
+                        "_id": "649070f8e3ab58f71dfa0a90",
+                        "createdAt": "2023-06-19T15:15:04.923Z",
+                        "updatedAt": "2023-06-19T15:15:04.923Z",
+                        "__v": 0
+                    }
+                    
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: array
+                    example: [
+                      "نام باید به صورت حروف وارد شود",
+                    ]
+                  statusCode: 
+                    type: string
+                    example: 400
+                  error:
+                    type: string
+                    example: bad request
+
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Unauthorized"
+                  statusCode: 
+                    type: string
+                    example: 401
+        
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Forbidden resource"
+                  statusCode: 
+                    type: string
+                    example: 403
+
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "Not Found"
+                  message:
+                    type: string
+                    example: "Cannot Patch /admins/xxxxxxxxxxx"
+                  statusCode: 
+                    type: string
+                    example: 404
+        "500":
+          description: Internet Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Internal server error"
+                  statusCode: 
+                    type: string
+                    example: 500
+
