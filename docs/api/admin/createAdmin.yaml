@@ -1,49 +1,52 @@
 paths:
-  /admins/:id:
-    patch:
-      description: update one admin
-      summary: update admins
+  /admins:
+    post:
+      description: create one admin
+      summary: create admins
       tags:
         - admins
       servers:
-        - url: http://baseUrl/admins/:id
+        - url: http://baseUrl/admins
           description: Production server
       x-code-samples:
         - lang: cURL
           source: |
-            curl --location --request PATCH 'http://baseUrl/admins/63e571e83e46dfa3902bedc3' \
-            --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpX...' \
+            curl --location --request POST 'http://baseUrl/admins' \
+            --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwa...' \
             --header 'Content-Type: application/json' \
             --data-raw '{
-                "name": "ali"
+                "firstName": "al",
+                "lastName": "abdi",
+                "phoneNumber": "09394552776",
+                "passwordConfirm": "!QAZ1qaz",
+                "password": "!QAZ1qaz"
             }'
         - lang: node.js
           source: |
             var request = require('request');
             var options = {
-              'method': 'PATCH',
-              'url': 'http://baseUrl/admins/63e571e83e46dfa3902bedc3',
+              'method': 'POST',
+              'url': 'http://baseUrl/admins',
               'headers': {
-                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpX...',
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwa...',
                 'Content-Type': 'application/json'
               },
               body: JSON.stringify({
-                "name": "ali"
+                "firstName": "al",
+                "lastName": "abdi",
+                "phoneNumber": "09394552776",
+                "passwordConfirm": "!QAZ1qaz",
+                "password": "!QAZ1qaz"
               })
 
-            };
-            request(options, function (error, response) {
-              if (error) throw new Error(error);
-              console.log(response.body);
-            });
+              };
+              request(options, function (error, response) {
+                if (error) throw new Error(error);
+                console.log(response.body);
+              });
+
 
       parameters:
-        - in: path
-          name: id
-          description: admin id
-          required: true
-          type: string
-
         - name: auth
           in: header
           description: an authorization header
@@ -58,13 +61,23 @@ paths:
               properties: 
                 firstName:
                   type: string
-                  example: 'علی'
+                  example: علی
                 lastName:
                   type: string
-                  example: 'علی'
+                  example: عبدی
+                phoneNumber:
+                  type: string
+                  example: 09394552776
+                password:
+                  type: string
+                  description: password must be 8 character or more and strong pass(contain number letter, ...)
+                  example: "!QAZ1qaz"
+                passwordConfirm: 
+                  type: string
+                  example: "!QAZ1qaz"
 
       responses:
-        "200":
+        "201":
           description: ok
           content:
             application/json:
@@ -89,12 +102,11 @@ paths:
                         type: number
                     example:  {
                       "_id": "63e571e83e46dfa3902bedc3",
-                      "firstName": "al",
-                      "lastName": "abdi",
+                      "firstName": "علی",
+                      "lastName": "عبدی",
                       "phoneNumber": "+989394552776",
                       "__v": 0
                     }
-
         "400":
           description: Bad Request
           content:
@@ -105,7 +117,9 @@ paths:
                   message:
                     type: array
                     example: [
-                      "شناسه به درستی وارد نشده است"
+                      "نام خانوادگی باید به صورت حروف وارد شود",
+                      "نام نمی تواند خالی باشد",
+                      "شماره موبایل در سیستم وجود دارد"
                     ]
                   statusCode: 
                     type: string

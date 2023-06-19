@@ -29,6 +29,408 @@
   ],
   "swagger": "2.0",
   "paths": {
+    "/admins": {
+      "post": {
+        "description": "create one admin",
+        "summary": "create admins",
+        "tags": [
+          "admins"
+        ],
+        "servers": [
+          {
+            "url": "http://baseUrl/admins",
+            "description": "Production server"
+          }
+        ],
+        "x-code-samples": [
+          {
+            "lang": "cURL",
+            "source": "curl --location --request POST 'http://baseUrl/admins' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwa...' \\\n--header 'Content-Type: application/json' \\\n--data-raw '{\n    \"firstName\": \"al\",\n    \"lastName\": \"abdi\",\n    \"phoneNumber\": \"09394552776\",\n    \"passwordConfirm\": \"!QAZ1qaz\",\n    \"password\": \"!QAZ1qaz\"\n}'\n"
+          },
+          {
+            "lang": "node.js",
+            "source": "var request = require('request');\nvar options = {\n  'method': 'POST',\n  'url': 'http://baseUrl/admins',\n  'headers': {\n    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwa...',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    \"firstName\": \"al\",\n    \"lastName\": \"abdi\",\n    \"phoneNumber\": \"09394552776\",\n    \"passwordConfirm\": \"!QAZ1qaz\",\n    \"password\": \"!QAZ1qaz\"\n  })\n\n  };\n  request(options, function (error, response) {\n    if (error) throw new Error(error);\n    console.log(response.body);\n  });\n"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "auth",
+            "in": "header",
+            "description": "an authorization header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "firstName": {
+                    "type": "string",
+                    "example": "علی"
+                  },
+                  "lastName": {
+                    "type": "string",
+                    "example": "عبدی"
+                  },
+                  "phoneNumber": {
+                    "type": "string",
+                    "example": "09394552776"
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "password must be 8 character or more and strong pass(contain number letter, ...)",
+                    "example": "!QAZ1qaz"
+                  },
+                  "passwordConfirm": {
+                    "type": "string",
+                    "example": "!QAZ1qaz"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "درخواست انجام شد"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string"
+                        },
+                        "firstName": {
+                          "type": "string"
+                        },
+                        "lastName": {
+                          "type": "string"
+                        },
+                        "phoneNumber": {
+                          "type": "string"
+                        },
+                        "__v": {
+                          "type": "number"
+                        }
+                      },
+                      "example": {
+                        "_id": "63e571e83e46dfa3902bedc3",
+                        "firstName": "علی",
+                        "lastName": "عبدی",
+                        "phoneNumber": "+989394552776",
+                        "__v": 0
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "array",
+                      "example": [
+                        "نام خانوادگی باید به صورت حروف وارد شود",
+                        "نام نمی تواند خالی باشد",
+                        "شماره موبایل در سیستم وجود دارد"
+                      ]
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "example": "bad request"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unauthorized"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 401
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Forbidden resource"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 403
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Not Found"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Cannot Patch /admins/xxxxxxxxxxx"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 404
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internet Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Internal server error"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 500
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "get all admins list",
+        "summary": "get admins",
+        "tags": [
+          "admins"
+        ],
+        "servers": [
+          {
+            "url": "http://baseUrl/admins"
+          }
+        ],
+        "x-code-samples": [
+          {
+            "lang": "cURL",
+            "source": "curl --location --request GET 'http://baseUrl/admins' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZU51bW....'\n"
+          },
+          {
+            "lang": "node.js",
+            "source": "var request = require('request');\nvar options = {\n  'method': 'GET',\n  'url': 'http://baseUrl/admins',\n  'headers': {\n    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZU51bW....'\n  }\n};\nrequest(options, function (error, response) {\n  if (error) throw new Error(error);\n  console.log(response.body);\n});\n"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "auth",
+            "in": "header",
+            "description": "an authorization header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "درخواست انجام شد"
+                    },
+                    "data": {
+                      "type": "array",
+                      "properties": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string"
+                          },
+                          "firstName": {
+                            "type": "string"
+                          },
+                          "lastName": {
+                            "type": "string"
+                          },
+                          "phoneNumber": {
+                            "type": "string"
+                          },
+                          "__v": {
+                            "type": "number"
+                          }
+                        },
+                        "example": {
+                          "_id": "63e571e83e46dfa3902bedc3",
+                          "firstName": "al",
+                          "lastName": "abdi",
+                          "phoneNumber": "+989394552776",
+                          "__v": 0
+                        }
+                      },
+                      "example": [
+                        {
+                          "_id": "63e571e83e46dfa3902bedc3",
+                          "firstName": "ali",
+                          "lastName": "abdi",
+                          "phoneNumber": "+989394552776",
+                          "__v": 0
+                        },
+                        {
+                          "_id": "63e573a0295e4222cf307fe4",
+                          "firstName": "mohammd",
+                          "lastName": "abdi",
+                          "phoneNumber": "+989394552775",
+                          "__v": 0
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unauthorized"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 401
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Forbidden resource"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 403
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Not Found"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Cannot GET /admins/xxxxxxxxxxx"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 404
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internet Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Internal server error"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 500
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/admins/:id": {
       "delete": {
         "description": "Delete one admin",
@@ -105,6 +507,32 @@
                         "phoneNumber": "+989394552776",
                         "__v": 0
                       }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "array",
+                      "example": [
+                        "شناسه به درستی وارد نشده است"
+                      ]
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "example": "bad request"
                     }
                   }
                 }
@@ -298,6 +726,32 @@
               }
             }
           },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "array",
+                      "example": [
+                        "شناسه به درستی وارد نشده است"
+                      ]
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "example": "bad request"
+                    }
+                  }
+                }
+              }
+            }
+          },
           "401": {
             "description": "Unauthorized",
             "content": {
@@ -352,187 +806,6 @@
                     "message": {
                       "type": "string",
                       "example": "Cannot Patch /admins/xxxxxxxxxxx"
-                    },
-                    "statusCode": {
-                      "type": "string",
-                      "example": 404
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internet Server Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Internal server error"
-                    },
-                    "statusCode": {
-                      "type": "string",
-                      "example": 500
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/admins": {
-      "get": {
-        "description": "get all admins list",
-        "summary": "get admins",
-        "tags": [
-          "admins"
-        ],
-        "servers": [
-          {
-            "url": "http://baseUrl/admins"
-          }
-        ],
-        "x-code-samples": [
-          {
-            "lang": "cURL",
-            "source": "curl --location --request GET 'http://baseUrl/admins' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZU51bW....'\n"
-          },
-          {
-            "lang": "node.js",
-            "source": "var request = require('request');\nvar options = {\n  'method': 'GET',\n  'url': 'http://baseUrl/admins',\n  'headers': {\n    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZU51bW....'\n  }\n};\nrequest(options, function (error, response) {\n  if (error) throw new Error(error);\n  console.log(response.body);\n});\n"
-          }
-        ],
-        "parameters": [
-          {
-            "name": "auth",
-            "in": "header",
-            "description": "an authorization header",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ok",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "درخواست انجام شد"
-                    },
-                    "data": {
-                      "type": "array",
-                      "properties": {
-                        "type": "object",
-                        "properties": {
-                          "_id": {
-                            "type": "string"
-                          },
-                          "firstName": {
-                            "type": "string"
-                          },
-                          "lastName": {
-                            "type": "string"
-                          },
-                          "phoneNumber": {
-                            "type": "string"
-                          },
-                          "__v": {
-                            "type": "number"
-                          }
-                        },
-                        "example": {
-                          "_id": "63e571e83e46dfa3902bedc3",
-                          "firstName": "al",
-                          "lastName": "abdi",
-                          "phoneNumber": "+989394552776",
-                          "__v": 0
-                        }
-                      },
-                      "example": [
-                        {
-                          "_id": "63e571e83e46dfa3902bedc3",
-                          "firstName": "ali",
-                          "lastName": "abdi",
-                          "phoneNumber": "+989394552776",
-                          "__v": 0
-                        },
-                        {
-                          "_id": "63e573a0295e4222cf307fe4",
-                          "firstName": "mohammd",
-                          "lastName": "abdi",
-                          "phoneNumber": "+989394552775",
-                          "__v": 0
-                        }
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Unauthorized"
-                    },
-                    "statusCode": {
-                      "type": "string",
-                      "example": 401
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Forbidden resource"
-                    },
-                    "statusCode": {
-                      "type": "string",
-                      "example": 403
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "example": "Not Found"
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Cannot GET /admins/xxxxxxxxxxx"
                     },
                     "statusCode": {
                       "type": "string",

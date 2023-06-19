@@ -71,6 +71,24 @@ paths:
                       "phoneNumber": "+989394552776",
                       "__v": 0
                     }
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: array
+                    example: [
+                      "شناسه به درستی وارد نشده است"
+                    ]
+                  statusCode: 
+                    type: string
+                    example: 400
+                  error:
+                    type: string
+                    example: bad request
 
         "401":
           description: Unauthorized
