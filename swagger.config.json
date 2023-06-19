@@ -30,7 +30,8 @@
         "auth",
         "categories",
         "products",
-        "users"
+        "users",
+        "carts"
       ]
     }
   ]

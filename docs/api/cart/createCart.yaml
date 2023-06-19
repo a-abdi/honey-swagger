@@ -1,0 +1,164 @@
+paths:
+  /carts/products:
+    post:
+      description: User add product to Cart
+      summary: User Cart
+      tags:
+        - carts
+      servers:
+        - url: http://baseUrl
+      x-code-samples:
+        - lang: cURL
+          source: |
+            curl --location --request POST 'http://lbaseUrl/carts/products' \
+            --header 'Authorization: Bearer eyJhbGciOiJIUzI1N...' \
+            --header 'Content-Type: application/json' \
+            --data-raw '{
+                "products": [
+                    {
+                        "quantity": 10,
+                        "_id": "64704cd2b24eac4599451066"
+                    }
+                ]
+            }'
+        - lang: node.js
+          source: |
+            var request = require('request');
+            var options = {
+              'method': 'POST',
+              'url': 'http://lbaseUrl/carts/products',
+              'headers': {
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1N...',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                "products": [
+                  {
+                    "quantity": 10,
+                    "_id": "64704cd2b24eac4599451066"
+                  }
+                ]
+              })
+
+            };
+            request(options, function (error, response) {
+              if (error) throw new Error(error);
+              console.log(response.body);
+            });
+
+      parameters:
+        - name: auth
+          in: header
+          description: an authorization header
+          required: true
+          type: string
+
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              type: array
+              items: 
+                type: object
+                required:
+                  - quantity
+                  - _id
+                properties:
+                  quantity:
+                    type: intiger
+                    example: 20
+                  _id:
+                    type: string
+                    example: "6468b16b801b654457284967"
+
+      responses:
+        "201":
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "درخواست انجام شد"
+                    
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: array
+                    items:
+                      type: string
+                    example: [
+                      "شناسه به درستی وارد نشده است",
+                    ]
+                  statusCode: 
+                    type: string
+                    example: 400
+                  error:
+                    type: string
+                    example: bad request
+
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Unauthorized"
+                  statusCode: 
+                    type: string
+                    example: 401
+        
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Forbidden resource"
+                  statusCode: 
+                    type: string
+                    example: 403
+
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "Not Found"
+                  message:
+                    type: string
+                    example: "Cannot Patch /invalid-address"
+                  statusCode: 
+                    type: string
+                    example: 404
+        "500":
+          description: Internet Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Internal server error"
+                  statusCode: 
+                    type: string
+                    example: 500
+
