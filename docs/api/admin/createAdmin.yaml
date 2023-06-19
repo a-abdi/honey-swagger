@@ -58,6 +58,12 @@ paths:
           application/json:
             schema: 
               type: object
+              required:
+                  - lastName
+                  - firstName
+                  - phoneNumber
+                  - password
+                  - passwordConfirm
               properties: 
                 firstName:
                   type: string

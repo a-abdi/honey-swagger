@@ -1,0 +1,114 @@
+paths:
+  /auth/login:
+    post:
+      description: User login
+      summary: User login
+      tags:
+        - auth
+      servers:
+        - url: http://baseUrl//auth/login
+      x-code-samples:
+        - lang: cURL
+          source: |
+            curl --location --request POST 'http://baseUrl/auth/login' \
+            --header 'Content-Type: application/json' \
+            --data-raw '{
+                "phoneNumber": "09360980928",
+                "password": "!QAZ1qaz"
+            }'
+        - lang: node.js
+          source: |
+            var request = require('request');
+            var options = {
+              'method': 'POST',
+              'url': 'http://baseUrl/auth/login',
+              'headers': {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                "phoneNumber": "09360980928",
+                "password": "!QAZ1qaz"
+              })
+
+            };
+            request(options, function (error, response) {
+              if (error) throw new Error(error);
+              console.log(response.body);
+            });
+
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              type: object
+              required:
+                  - phoneNumber
+                  - password
+              properties: 
+                phoneNumber:
+                  type: string
+                  example: 09394552776
+                password:
+                  type: string
+                  example: "!QAZ1qaz"
+
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      access_token:
+                        type: string
+                    example:  {
+                      access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZU51bWJlc..."
+                    }
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Unauthorized"
+                  statusCode: 
+                    type: string
+                    example: 401
+        
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "Not Found"
+                  message:
+                    type: string
+                    example: "Cannot Patch /admins/xxxxxxxxxxx"
+                  statusCode: 
+                    type: string
+                    example: 404
+        "500":
+          description: Internet Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Internal server error"
+                  statusCode: 
+                    type: string
+                    example: 500
+
