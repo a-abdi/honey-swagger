@@ -1,0 +1,193 @@
+paths:
+  /categories:
+    post:
+      description: Admin create new categgory
+      summary: create category
+      tags:
+        - categories
+      servers:
+        - url: http://baseUrl/categories
+      x-code-samples:
+        - lang: cURL
+          source: |
+            curl --location --request POST 'http://baseUrl/categories' \
+            --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG...' \
+            --header 'Content-Type: application/json' \
+            --data-raw '{
+                "name": "checl",
+                "description": "this is book category",
+                "properties": ["6468b16b801b654457284967"]
+            }'
+        - lang: node.js
+          source: |
+            var request = require('request');
+            var options = {
+              'method': 'POST',
+              'url': 'http://baseUrl/categories',
+              'headers': {
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG...',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                "name": "checl",
+                "description": "this is book category",
+                "properties": [
+                  "6468b16b801b654457284967"
+                ]
+              })
+
+            };
+            request(options, function (error, response) {
+              if (error) throw new Error(error);
+              console.log(response.body);
+            });
+
+      parameters:
+        - name: auth
+          in: header
+          description: an authorization header
+          required: true
+          type: string
+
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              type: object
+              required:
+                  - name
+                  - description
+                  - properties
+              properties: 
+                name:
+                  type: string
+                  example: لوازم زنبور داری
+                description:
+                  type: string
+                  example: وسایل مورد نیاز در زنبورداری بسیار متنوع می باشند که بسته به مرحله زنبورداری متفاوت است.
+                properties:
+                  type: array
+                  description: list property for category
+                  example: ["6468b16b801b654457284967"]
+
+      responses:
+        "201":
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "درخواست انجام شد"
+                  data:
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                      name:
+                        type: string
+                      description:
+                        type: string
+                      properties: 
+                        type: array
+                      createdAt:
+                        type: string
+                      updatedAt:
+                        type: string
+                      __v: 
+                        type: number
+                  example:  {
+                    "message": "درخواست انجام شد",
+                    "data": {
+                      "name": "book",
+                      "description": "this is book category",
+                      "properties": [
+                          "6468b16b801b654457284967"
+                      ],
+                      "_id": "64904fa356a4782b667dccad",
+                      "createdAt": "2023-06-19T12:52:51.023Z",
+                      "updatedAt": "2023-06-19T12:52:51.023Z",
+                      "__v": 0
+                    }
+                  }
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: array
+                    example: [
+                      "نام باید به صورت حروف وارد شود",
+                      "نام نباید بیشتر از 50 حرف باشد",
+                      "نام نباید کمتر از 3 حرف باشد"
+                    ]
+                  statusCode: 
+                    type: string
+                    example: 400
+                  error:
+                    type: string
+                    example: bad request
+
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Unauthorized"
+                  statusCode: 
+                    type: string
+                    example: 401
+        
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Forbidden resource"
+                  statusCode: 
+                    type: string
+                    example: 403
+
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "Not Found"
+                  message:
+                    type: string
+                    example: "Cannot Patch /admins/xxxxxxxxxxx"
+                  statusCode: 
+                    type: string
+                    example: 404
+        "500":
+          description: Internet Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Internal server error"
+                  statusCode: 
+                    type: string
+                    example: 500
+

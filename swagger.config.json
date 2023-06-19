@@ -27,7 +27,8 @@
       "name": "ai service",
       "tags": [
         "admins",
-        "auth"
+        "auth",
+        "categories"
       ]
     }
   ]
