@@ -1,37 +1,67 @@
 paths:
-  /admins:
-    get:
-      description: get all admins list
-      summary: get admins
+  /admins/:id:
+    patch:
+      description: update one admin
+      summary: update admins
       tags:
         - admin
       servers:
-        - url: http://baseUrl/admins
+        - url: http://baseUrl/admins/:id
+          description: Production server
       x-code-samples:
         - lang: cURL
           source: |
-            curl --location --request GET 'http://baseUrl/admins' \
-            --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZU51bW....'
+            curl --location --request PATCH 'http://baseUrl/admins/63e571e83e46dfa3902bedc3' \
+            --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZU51bWJlciI6Iis5ODkzNjA5ODA5MjgiLCJzdWIiOiI2M2VjMDJmN2NmMzkyZjY3YzBhZDZmMGMiLCJyb2xlcyI6WyJhZG1pbiJdLCJpYXQiOjE2ODA4Nzg1MTMsImV4cCI6MTcxMjQxNDUxM30.xQ4UH2MQyRujn6Fc7T-2K2h42MyailPrIr0B8VFH20w' \
+            --header 'Content-Type: application/json' \
+            --data-raw '{
+                "name": "ali"
+            }'
         - lang: node.js
           source: |
             var request = require('request');
             var options = {
-              'method': 'GET',
-              'url': 'http://baseUrl/admins',
+              'method': 'PATCH',
+              'url': 'http://baseUrl/admins/63e571e83e46dfa3902bedc3',
               'headers': {
-                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZU51bW....'
-              }
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZU51bWJlciI6Iis5ODkzNjA5ODA5MjgiLCJzdWIiOiI2M2VjMDJmN2NmMzkyZjY3YzBhZDZmMGMiLCJyb2xlcyI6WyJhZG1pbiJdLCJpYXQiOjE2ODA4Nzg1MTMsImV4cCI6MTcxMjQxNDUxM30.xQ4UH2MQyRujn6Fc7T-2K2h42MyailPrIr0B8VFH20w',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                "name": "ali"
+              })
+
             };
             request(options, function (error, response) {
               if (error) throw new Error(error);
               console.log(response.body);
             });
+
       parameters:
+        - in: path
+          name: id
+          description: admin id
+          required: true
+          type: string
+
         - name: auth
           in: header
           description: an authorization header
           required: true
           type: string
+
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              type: object
+              properties: 
+                firstName:
+                  type: string
+                  example: 'علی'
+                lastName:
+                  type: string
+                  example: 'علی'
 
       responses:
         "200":
@@ -45,43 +75,25 @@ paths:
                     type: string
                     example: "درخواست انجام شد"
                   data:
-                    type: array
+                    type: object
                     properties:
-                      type: object
-                      properties:
-                        _id:
-                          type: string
-                        firstName:
-                          type: string
-                        lastName:
-                          type: string
-                        phoneNumber: 
-                          type: string
-                        __v: 
-                          type: number
-                      example:  {
-                        "_id": "63e571e83e46dfa3902bedc3",
-                        "firstName": "al",
-                        "lastName": "abdi",
-                        "phoneNumber": "+989394552776",
-                        "__v": 0
-                      }
-                    example: [
-                      {
-                        "_id": "63e571e83e46dfa3902bedc3",
-                        "firstName": "ali",
-                        "lastName": "abdi",
-                        "phoneNumber": "+989394552776",
-                        "__v": 0
-                      },
-                      {
-                        "_id": "63e573a0295e4222cf307fe4",
-                        "firstName": "mohammd",
-                        "lastName": "abdi",
-                        "phoneNumber": "+989394552775",
-                        "__v": 0
-                      }
-                    ]
+                      _id:
+                        type: string
+                      firstName:
+                        type: string
+                      lastName:
+                        type: string
+                      phoneNumber: 
+                        type: string
+                      __v: 
+                        type: number
+                    example:  {
+                      "_id": "63e571e83e46dfa3902bedc3",
+                      "firstName": "al",
+                      "lastName": "abdi",
+                      "phoneNumber": "+989394552776",
+                      "__v": 0
+                    }
 
         "401":
           description: Unauthorized
@@ -123,7 +135,7 @@ paths:
                     example: "Not Found"
                   message:
                     type: string
-                    example: "Cannot GET /admins/xxxxxxxxxxx"
+                    example: "Cannot Patch /admins/xxxxxxxxxxx"
                   statusCode: 
                     type: string
                     example: 404

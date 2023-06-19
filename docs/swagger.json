@@ -38,18 +38,17 @@
         ],
         "servers": [
           {
-            "url": "http://localhost:3000/admins",
-            "description": "Production server"
+            "url": "http://baseUrl/admins"
           }
         ],
         "x-code-samples": [
           {
             "lang": "cURL",
-            "source": "curl --location --request GET 'http://localhost:3000/admins' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZU51bW....'\n"
+            "source": "curl --location --request GET 'http://baseUrl/admins' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZU51bW....'\n"
           },
           {
             "lang": "node.js",
-            "source": "var request = require('request');\nvar options = {\n  'method': 'GET',\n  'url': 'http://localhost:3000/admins',\n  'headers': {\n    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZU51bW....'\n  }\n};\nrequest(options, function (error, response) {\n  if (error) throw new Error(error);\n  console.log(response.body);\n});\n"
+            "source": "var request = require('request');\nvar options = {\n  'method': 'GET',\n  'url': 'http://baseUrl/admins',\n  'headers': {\n    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZU51bW....'\n  }\n};\nrequest(options, function (error, response) {\n  if (error) throw new Error(error);\n  console.log(response.body);\n});\n"
           }
         ],
         "parameters": [
@@ -178,6 +177,195 @@
                     "message": {
                       "type": "string",
                       "example": "Cannot GET /admins/xxxxxxxxxxx"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 404
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internet Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Internal server error"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 500
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admins/:id": {
+      "patch": {
+        "description": "update one admin",
+        "summary": "update admins",
+        "tags": [
+          "admin"
+        ],
+        "servers": [
+          {
+            "url": "http://baseUrl/admins/:id",
+            "description": "Production server"
+          }
+        ],
+        "x-code-samples": [
+          {
+            "lang": "cURL",
+            "source": "curl --location --request PATCH 'http://baseUrl/admins/63e571e83e46dfa3902bedc3' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZU51bWJlciI6Iis5ODkzNjA5ODA5MjgiLCJzdWIiOiI2M2VjMDJmN2NmMzkyZjY3YzBhZDZmMGMiLCJyb2xlcyI6WyJhZG1pbiJdLCJpYXQiOjE2ODA4Nzg1MTMsImV4cCI6MTcxMjQxNDUxM30.xQ4UH2MQyRujn6Fc7T-2K2h42MyailPrIr0B8VFH20w' \\\n--header 'Content-Type: application/json' \\\n--data-raw '{\n    \"name\": \"ali\"\n}'\n"
+          },
+          {
+            "lang": "node.js",
+            "source": "var request = require('request');\nvar options = {\n  'method': 'PATCH',\n  'url': 'http://baseUrl/admins/63e571e83e46dfa3902bedc3',\n  'headers': {\n    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZU51bWJlciI6Iis5ODkzNjA5ODA5MjgiLCJzdWIiOiI2M2VjMDJmN2NmMzkyZjY3YzBhZDZmMGMiLCJyb2xlcyI6WyJhZG1pbiJdLCJpYXQiOjE2ODA4Nzg1MTMsImV4cCI6MTcxMjQxNDUxM30.xQ4UH2MQyRujn6Fc7T-2K2h42MyailPrIr0B8VFH20w',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    \"name\": \"ali\"\n  })\n\n};\nrequest(options, function (error, response) {\n  if (error) throw new Error(error);\n  console.log(response.body);\n});\n"
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "admin id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "auth",
+            "in": "header",
+            "description": "an authorization header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "firstName": {
+                    "type": "string",
+                    "example": "علی"
+                  },
+                  "lastName": {
+                    "type": "string",
+                    "example": "علی"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "درخواست انجام شد"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string"
+                        },
+                        "firstName": {
+                          "type": "string"
+                        },
+                        "lastName": {
+                          "type": "string"
+                        },
+                        "phoneNumber": {
+                          "type": "string"
+                        },
+                        "__v": {
+                          "type": "number"
+                        }
+                      },
+                      "example": {
+                        "_id": "63e571e83e46dfa3902bedc3",
+                        "firstName": "al",
+                        "lastName": "abdi",
+                        "phoneNumber": "+989394552776",
+                        "__v": 0
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unauthorized"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 401
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Forbidden resource"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 403
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Not Found"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Cannot Patch /admins/xxxxxxxxxxx"
                     },
                     "statusCode": {
                       "type": "string",
