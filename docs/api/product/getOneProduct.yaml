@@ -1,22 +1,22 @@
 paths:
-  /products:
+  /products/:id:
     get:
-      description: Get all product  
-      summary: Get All product
+      description: Get one product  
+      summary: Get one product
       tags:
         - products
       servers:
-        - url: http://baseUrl/products
+        - url: http://baseUrl/products/:id
       x-code-samples:
         - lang: cURL
           source: |
-            curl --location --request GET 'http://baseUrl/products'
+            curl --location --request GET 'http://baseUrl/products/64704cd2b24eac4599451066'
         - lang: node.js
           source: |
             var request = require('request');
             var options = {
               'method': 'GET',
-              'url': 'http://baseUrl/products',
+              'url': 'http://baseUrl/products/64704cd2b24eac4599451066',
               'headers': {
               }
             };
@@ -24,24 +24,13 @@ paths:
               if (error) throw new Error(error);
               console.log(response.body);
             });
+
       parameters:
-        - name: category
-          in: query
-          description: filter product by category id
-          required: false
+        - name: id
+          in: path
+          description: product id
+          required: true
           type: string
-
-        - name: sort
-          in: query
-          description: sort products by sort number
-          required: false
-          type: intiger
-
-        - name: deletedAt
-          in: query
-          description: filter product by deletedAt
-          required: false
-          type: boolean
 
       responses:
         "200":
@@ -55,41 +44,39 @@ paths:
                     type: string
                     example: "درخواست انجام شد"
                   data:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        _id:
-                          type: string
-                        name:
-                          type: string
-                        description:
-                          type: string
-                        category: 
-                          type: string
-                        price: 
-                          type: string
-                        discount: 
-                          type: string
-                        quantity: 
-                          type: string
-                        code: 
-                          type: string
-                        productImagesSrc: 
-                          type: array
-                        additionalsImageSrc:
-                          type: array
-                        customProperty:
-                          type: array
-                        createdAt:
-                          type: string
-                        updatedAt:
-                          type: string
-                        __v: 
-                          type: number
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                      name:
+                        type: string
+                      description:
+                        type: string
+                      category: 
+                        type: string
+                      price: 
+                        type: string
+                      discount: 
+                        type: string
+                      quantity: 
+                        type: string
+                      code: 
+                        type: string
+                      productImagesSrc: 
+                        type: array
+                      additionalsImageSrc:
+                        type: array
+                      customProperty:
+                        type: array
+                      createdAt:
+                        type: string
+                      updatedAt:
+                        type: string
+                      __v: 
+                        type: number
                     
                     example: 
-                      [{
+                      {
                         "name": "ali",
                         "price": 12255,
                         "quantity": 222,
@@ -121,7 +108,7 @@ paths:
                         "createdAt": "2023-06-19T15:15:04.923Z",
                         "updatedAt": "2023-06-19T15:15:04.923Z",
                         "__v": 0
-                    }]
+                    }
                     
         "400":
           description: Bad Request
@@ -135,7 +122,7 @@ paths:
                     items:
                       type: string
                     example: [
-                      "مرتب سازی به درستی وارد نشده است"
+                      "شناسه به درستی وارد نشده است"
                     ]
                   statusCode: 
                     type: string

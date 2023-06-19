@@ -120,6 +120,8 @@ paths:
                 properties:
                   message:
                     type: array
+                    items:
+                      type: string
                     example: [
                         "نام در سیستم وجود دارد"
                     ]

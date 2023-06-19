@@ -104,6 +104,8 @@ paths:
                 properties:
                   message:
                     type: array
+                    items:
+                      type: string
                     example: [
                       "شناسه به درستی وارد نشده است"
                     ]

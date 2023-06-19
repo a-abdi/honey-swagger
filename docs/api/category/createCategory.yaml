@@ -119,6 +119,8 @@ paths:
                 properties:
                   message:
                     type: array
+                    items:
+                      type: string
                     example: [
                       "نام باید به صورت حروف وارد شود",
                       "نام نباید بیشتر از 50 حرف باشد",

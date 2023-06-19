@@ -122,6 +122,8 @@ paths:
                 properties:
                   message:
                     type: array
+                    items:
+                      type: string
                     example: [
                       "نام خانوادگی باید به صورت حروف وارد شود",
                       "نام نمی تواند خالی باشد",
