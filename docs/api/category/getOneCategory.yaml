@@ -1,0 +1,189 @@
+paths:
+  /categories/:id:
+    get:
+      description: Admin get one category
+      summary: Get one category
+      tags:
+        - categories
+      servers:
+        - url: http://baseUrl/categories/:id
+      x-code-samples:
+        - lang: cURL
+          source: |
+            curl --location --request GET 'http://baseUrl/categories/646fa78d8bfe8d1617ab556b' \
+            --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV...'
+        - lang: node.js
+          source: |
+            var request = require('request');
+            var options = {
+              'method': 'GET',
+              'url': 'http://baseUrl/categories/646fa78d8bfe8d1617ab556b',
+              'headers': {
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXV...'
+              }
+            };
+            request(options, function (error, response) {
+              if (error) throw new Error(error);
+              console.log(response.body);
+            });
+
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "درخواست انجام شد"
+                  data:
+                    type: object
+                    properties:
+                      __id:
+                        type: string
+                      name:
+                        type: string
+                      description:
+                        type: string
+                      properties: 
+                        type: array
+                      createdAt:
+                        type: string
+                      updatedAt:
+                        type: string
+                      __v: 
+                        type: number
+                    example: {
+                        "_id": "646fa78d8bfe8d1617ab556b",
+                        "name": "عسل",
+                        "description": "مطابق استاندارد بین المللی که در ایران هم پذیرفته شده است، میزان پرولین در عسل طبیعی نباید کمتر از ۱۸۰ میلی‌گرم درکیلوگرم باشد. مقادیر کمتر از این مقدار نشان دهنده‌ای این است که تغذیه زنبور طبیعی نبوده است. و هر چه این مقدار بیشتر باشد نشان از کیفیت بالای عسل دارد.\n\n",
+                        "properties": [
+                            {
+                                "_id": "646fa6858bfe8d1617ab555b",
+                                "label": "ساکارز",
+                                "type": "number",
+                                "unit": [
+                                    "درصد"
+                                ],
+                                "category": [],
+                                "createdAt": "2023-05-25T18:18:45.452Z",
+                                "updatedAt": "2023-05-25T18:18:45.452Z",
+                                "__v": 0
+                            },
+                            {
+                                "_id": "646fa74c8bfe8d1617ab555f",
+                                "label": "پرولین",
+                                "type": "number",
+                                "unit": [],
+                                "category": [],
+                                "createdAt": "2023-05-25T18:22:04.761Z",
+                                "updatedAt": "2023-05-25T18:22:04.761Z",
+                                "__v": 0
+                            },
+                            {
+                                "_id": "646fa75c8bfe8d1617ab5563",
+                                "label": "آزمایش",
+                                "type": "file",
+                                "unit": [],
+                                "category": [],
+                                "createdAt": "2023-05-25T18:22:20.656Z",
+                                "updatedAt": "2023-05-25T18:22:20.656Z",
+                                "__v": 0
+                            },
+                            {
+                                "_id": "6489fb654925b5509cb01d2b",
+                                "label": "وزن",
+                                "type": "text",
+                                "unit": [
+                                    "کیلو",
+                                    "گرم"
+                                ],
+                                "category": [],
+                                "createdAt": "2023-06-14T17:39:49.464Z",
+                                "updatedAt": "2023-06-14T17:39:49.464Z",
+                                "__v": 0
+                            }
+                        ],
+                        "createdAt": "2023-05-25T18:23:09.808Z",
+                        "updatedAt": "2023-06-14T22:31:12.095Z",
+                        "__v": 0
+                    }
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: array
+                    example: [
+                      "شناسه به درستی وارد نشده است"
+                    ]
+                  statusCode: 
+                    type: string
+                    example: 400
+                  error:
+                    type: string
+                    example: bad request
+
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Unauthorized"
+                  statusCode: 
+                    type: string
+                    example: 401
+        
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Forbidden resource"
+                  statusCode: 
+                    type: string
+                    example: 403
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "Not Found"
+                  message:
+                    type: string
+                    example: "Cannot GET /admins/xxxxxxxxxxx"
+                  statusCode: 
+                    type: string
+                    example: 404
+
+        "500":
+          description: Internet Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Internal server error"
+                  statusCode: 
+                    type: string
+                    example: 500
+
