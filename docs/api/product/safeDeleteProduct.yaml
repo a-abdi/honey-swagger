@@ -1,0 +1,165 @@
+paths:
+  /products/:id/safe-delete:
+    get:
+      description: Safe delete one products
+      summary: Safe delete
+      tags:
+        - products
+      servers:
+        - url: http://baseUrl
+      x-code-samples:
+        - lang: cURL
+          source: |
+            curl --location --request PATCH 'http://baseUrl/products/64803778cee36139e6931c9f/safe' \
+            --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI...'
+        - lang: node.js
+          source: |
+            var request = require('request');
+            var options = {
+              'method': 'PATCH',
+              'url': 'http://baseUrl/products/64803778cee36139e6931c9f/safe',
+              'headers': {
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI...'
+              }
+            };
+            request(options, function (error, response) {
+              if (error) throw new Error(error);
+              console.log(response.body);
+            });
+
+      parameters:
+        - name: id
+          in: path
+          description: product id
+          required: true
+          type: string
+
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "درخواست انجام شد"
+                  data:
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                      name:
+                        type: string
+                      description:
+                        type: string
+                      category: 
+                        type: string
+                      price: 
+                        type: string
+                      discount: 
+                        type: string
+                      quantity: 
+                        type: string
+                      code: 
+                        type: string
+                      productImagesSrc: 
+                        type: array
+                      additionalsImageSrc:
+                        type: array
+                      customProperty:
+                        type: array
+                      createdAt:
+                        type: string
+                      updatedAt:
+                        type: string
+                      __v: 
+                        type: number
+                    
+                    example: 
+                      {
+                        "name": "ali",
+                        "price": 12255,
+                        "quantity": 222,
+                        "code": "d20pgbv",
+                        "admin": "63ec02f7cf392f67c0ad6f0c",
+                        "category": "6468fc1a51c4a34f8138d14a",
+                        "discount": 2212,
+                        "productImagesSrc": [
+                            "http://baseUrl/upload/product/457b8fe1-bf36-40e1-a9e9-9c4447bfa6e1.png"
+                        ],
+                        "additionalsImageSrc": [
+                            "http://baseUrl/upload/product/a53d83ee-1f03-4be0-85c2-11c98fa88035.jpg",
+                            "http://baseUrl/upload/product/c1a56a3e-63fd-45ca-b304-e501a43b3a23.jpg"
+                        ],
+                        "customProperty": [
+                            {
+                                "value": "http://baseUrl/upload/product/c1a56a3e-63fd-45ca-b304-e501a43b3a23.jpg",
+                                "label": "آزمایش",
+                                "type": "file"
+                            },
+                            {
+                                "value": "8",
+                                "label": "ساکارز",
+                                "type": "number"
+                            }
+                        ],
+                        "deletedAt": false,
+                        "_id": "649070f8e3ab58f71dfa0a90",
+                        "createdAt": "2023-06-19T15:15:04.923Z",
+                        "updatedAt": "2023-06-19T15:15:04.923Z",
+                        "__v": 0
+                    }
+                    
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: array
+                    items:
+                      type: string
+                    example: [
+                      "شناسه به درستی وارد نشده است"
+                    ]
+                  statusCode: 
+                    type: string
+                    example: 400
+                  error:
+                    type: string
+                    example: bad request
+
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "Not Found"
+                  message:
+                    type: string
+                    example: "Cannot Patch /admins/xxxxxxxxxxx"
+                  statusCode: 
+                    type: string
+                    example: 404
+        "500":
+          description: Internet Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Internal server error"
+                  statusCode: 
+                    type: string
+                    example: 500
+
