@@ -46,7 +46,7 @@ paths:
                     example: "درخواست انجام شد"
                   data:
                     type: array
-                    properties:
+                    items:
                       type: object
                       properties:
                         _id:

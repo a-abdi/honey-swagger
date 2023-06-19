@@ -67,6 +67,8 @@ paths:
                 properties:
                   type: array
                   description: list property for category
+                  items:
+                    type: string
                   example: ["6468b16b801b654457284967"]
 
       responses:

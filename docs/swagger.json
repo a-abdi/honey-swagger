@@ -305,7 +305,7 @@
                     },
                     "data": {
                       "type": "array",
-                      "properties": {
+                      "items": {
                         "type": "object",
                         "properties": {
                           "_id": {
@@ -1173,6 +1173,9 @@
                   "properties": {
                     "type": "array",
                     "description": "list property for category",
+                    "items": {
+                      "type": "string"
+                    },
                     "example": [
                       "6468b16b801b654457284967"
                     ]
@@ -1385,7 +1388,7 @@
                     },
                     "data": {
                       "type": "array",
-                      "properties": {
+                      "items": {
                         "type": "object",
                         "properties": {
                           "__id": {
@@ -1807,6 +1810,9 @@
                   "properties": {
                     "type": "array",
                     "description": "list property for category",
+                    "items": {
+                      "type": "string"
+                    },
                     "example": [
                       "6468b16b801b654457284967"
                     ]
@@ -2493,46 +2499,6 @@
                     "error": {
                       "type": "string",
                       "example": "bad request"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Unauthorized"
-                    },
-                    "statusCode": {
-                      "type": "string",
-                      "example": 401
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Forbidden resource"
-                    },
-                    "statusCode": {
-                      "type": "string",
-                      "example": 403
                     }
                   }
                 }
