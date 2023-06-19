@@ -4,7 +4,7 @@ paths:
       description: get all admins list
       summary: get admins
       tags:
-        - admin
+        - admins
       servers:
         - url: http://baseUrl/admins
       x-code-samples:

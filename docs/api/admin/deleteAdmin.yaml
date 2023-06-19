@@ -1,36 +1,26 @@
 paths:
   /admins/:id:
-    patch:
-      description: update one admin
-      summary: update admins
+    delete:
+      description: Delete one admin
+      summary: Delete admins
       tags:
         - admins
       servers:
         - url: http://baseUrl/admins/:id
-          description: Production server
       x-code-samples:
         - lang: cURL
           source: |
-            curl --location --request PATCH 'http://baseUrl/admins/63e571e83e46dfa3902bedc3' \
-            --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpX...' \
-            --header 'Content-Type: application/json' \
-            --data-raw '{
-                "name": "ali"
-            }'
+            curl --location --request DELETE 'http://baseUrl/admins/63e571e83e46dfa3902bedc3' \
+            --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9...'
         - lang: node.js
           source: |
             var request = require('request');
             var options = {
-              'method': 'PATCH',
+              'method': 'DELETE',
               'url': 'http://baseUrl/admins/63e571e83e46dfa3902bedc3',
               'headers': {
-                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpX...',
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                "name": "ali"
-              })
-
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9...'
+              }
             };
             request(options, function (error, response) {
               if (error) throw new Error(error);
@@ -49,19 +39,6 @@ paths:
           description: an authorization header
           required: true
           type: string
-
-      requestBody:
-        content:
-          application/json:
-            schema: 
-              type: object
-              properties: 
-                firstName:
-                  type: string
-                  example: 'علی'
-                lastName:
-                  type: string
-                  example: 'علی'
 
       responses:
         "200":
@@ -135,7 +112,7 @@ paths:
                     example: "Not Found"
                   message:
                     type: string
-                    example: "Cannot Patch /admins/xxxxxxxxxxx"
+                    example: "Cannot Delete /admins/xxxxxxxxxxx"
                   statusCode: 
                     type: string
                     example: 404
