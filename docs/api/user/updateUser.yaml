@@ -151,27 +151,27 @@ paths:
                         type: string
                       lastName: 
                         type: string
-                    example: [
-                      "_id": "64724cba6666c49e972a846c",
-                      "phoneNumber": "+989394552776",
-                      "createdAt": "2023-05-27T18:32:26.660Z",
-                      "updatedAt": "2023-06-04T20:57:22.642Z",
-                      "__v": 0,
-                      "address": {
-                          "postalAddress": "استان فارس - شهرستان فسا - بخش ششده و قره بلاا عبدی",
-                          "province": "البرز",
-                          "city": "چهارباغ",
-                          "plaque": "256",
-                          "recipient": {
-                              "firstName": "محمد",
-                              "lastName": "عبدی",
-                              "phoneNumber": "+989363658879"
-                          },
-                          "postalCode": "7466135566"
-                      },
-                      "firstName": "علی",
-                      "lastName": "عبدی"
-                    ]
+                  example: [
+                    "_id": "64724cba6666c49e972a846c",
+                    "phoneNumber": "+989394552776",
+                    "createdAt": "2023-05-27T18:32:26.660Z",
+                    "updatedAt": "2023-06-04T20:57:22.642Z",
+                    "__v": 0,
+                    "address": {
+                        "postalAddress": "استان فارس - شهرستان فسا - بخش ششده و قره بلاا عبدی",
+                        "province": "البرز",
+                        "city": "چهارباغ",
+                        "plaque": "256",
+                        "recipient": {
+                            "firstName": "محمد",
+                            "lastName": "عبدی",
+                            "phoneNumber": "+989363658879"
+                        },
+                        "postalCode": "7466135566"
+                    },
+                    "firstName": "علی",
+                    "lastName": "عبدی"
+                  ]
         "400":
           description: Bad Request
           content:

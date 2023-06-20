@@ -1726,6 +1726,278 @@
         }
       }
     },
+    "/carts": {
+      "get": {
+        "description": "Get User self cart",
+        "summary": "Get cart",
+        "tags": [
+          "carts"
+        ],
+        "servers": [
+          {
+            "url": "http://baseUrl"
+          }
+        ],
+        "x-code-samples": [
+          {
+            "lang": "cURL",
+            "source": "curl --location --request GET 'http://baseUrl/carts' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5...'\n"
+          },
+          {
+            "lang": "node.js",
+            "source": "var request = require('request');\nvar options = {\n  'method': 'GET',\n  'url': 'http://baseUrl/carts',\n  'headers': {\n    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5...'\n  }\n};\nrequest(options, function (error, response) {\n  if (error) throw new Error(error);\n  console.log(response.body);\n});\n"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "auth",
+            "in": "header",
+            "description": "an authorization header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "درخواست انجام شد"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string"
+                        },
+                        "user": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "type": "string"
+                        },
+                        "__v": {
+                          "type": "number"
+                        },
+                        "products": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "quantity": {
+                                "type": "intiger"
+                              },
+                              "product": {
+                                "type": "object",
+                                "properties": {
+                                  "_id": {
+                                    "type": "string"
+                                  },
+                                  "name": {
+                                    "type": "string"
+                                  },
+                                  "description": {
+                                    "type": "string"
+                                  },
+                                  "category": {
+                                    "type": "string"
+                                  },
+                                  "price": {
+                                    "type": "string"
+                                  },
+                                  "discount": {
+                                    "type": "string"
+                                  },
+                                  "quantity": {
+                                    "type": "string"
+                                  },
+                                  "code": {
+                                    "type": "string"
+                                  },
+                                  "productImagesSrc": {
+                                    "type": "array"
+                                  },
+                                  "additionalsImageSrc": {
+                                    "type": "array"
+                                  },
+                                  "customProperty": {
+                                    "type": "array"
+                                  },
+                                  "createdAt": {
+                                    "type": "string"
+                                  },
+                                  "updatedAt": {
+                                    "type": "string"
+                                  },
+                                  "__v": {
+                                    "type": "number"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "example": {
+                      "_id": "649151415254f59e203ea131",
+                      "user": "64724cba6666c49e972a846c",
+                      "__v": 0,
+                      "createdAt": "2023-06-20T07:12:01.383Z",
+                      "products": [
+                        {
+                          "quantity": 10,
+                          "product": {
+                            "_id": "64704cd2b24eac4599451066",
+                            "name": "عسل کوهی",
+                            "price": 600000,
+                            "quantity": 881,
+                            "description": "عَسَل یا اَنگَبین (همچنین «انگُبین» و «اَنگُوین»[۱])، مایعی شیرین و گران‌رو است که توسط زنبورعسل و برخی حشرات دیگر نیز تولید می‌شود.[۲] زنبورها، عسل را از تراوش شکری گیاهان و گل‌ها (شهد گل‌ها) یا تراوش‌های برخی دیگر (مانند عسلک) از راه بالاآوری، فعالیت آنزیمی و بخار آب فرآوری می‌کنند. زنبورها عسل را در ساختارهایی از جنس موم به نام کندو اندوخته می‌کنند.[۲][۳][۴] عسل از کلونی‌های زنبورهای عسل وحشی یا از کندوهای زنبورهای پرورشی گردآوری می‌شود، که به این کار زنبورداری گفته می‌شود.\r\n\r\n",
+                            "code": "w90zxak8be",
+                            "category": "646fa78d8bfe8d1617ab556b",
+                            "discount": 49000,
+                            "productImagesSrc": [
+                              "http://baseUrl/upload/product/1cfd4636-876c-469f-89fc-c14e42d5429e.jpeg"
+                            ],
+                            "additionalsImageSrc": [
+                              "http://baseUrl/upload/product/d4b290d6-2a06-4952-8b00-3ebb6bbbd640.jpeg",
+                              "http://baseUrl/upload/product/6a1fb890-928c-4110-af73-6a430fe9fca4.jpeg",
+                              "http://baseUrl/upload/product/734a1222-1692-4551-82be-06bfc952245c.jpeg",
+                              "http://baseUrl/upload/product/be93b3dc-707b-4179-9e86-9b15641ab67b.jpeg"
+                            ],
+                            "customProperty": [
+                              {
+                                "value": "http://baseUrl/upload/product/bff53df6-7e5d-4846-8b1c-0c795b3af24f.jpeg",
+                                "label": "آزمایش",
+                                "type": "file"
+                              },
+                              {
+                                "value": "600",
+                                "label": "پرولین",
+                                "type": "number"
+                              },
+                              {
+                                "value": "6",
+                                "label": "ساکارز",
+                                "type": "number",
+                                "unit": "درصد"
+                              },
+                              {
+                                "value": "1000",
+                                "label": "وزن",
+                                "type": "text",
+                                "unit": "گرم"
+                              }
+                            ],
+                            "createdAt": "2023-05-26T06:08:18.544Z",
+                            "updatedAt": "2023-06-10T21:07:45.962Z",
+                            "__v": 0,
+                            "deletedAt": false
+                          }
+                        }
+                      ],
+                      "updatedAt": "2023-06-20T07:12:01.383Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unauthorized"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 401
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Forbidden resource"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 403
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Not Found"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Cannot Patch /invalid-address"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 404
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internet Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Internal server error"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 500
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/categories": {
       "post": {
         "description": "Admin create new categgory",
@@ -4914,45 +5186,45 @@
                         "lastName": {
                           "type": "string"
                         }
+                      }
+                    },
+                    "example": [
+                      {
+                        "_id": "64724cba6666c49e972a846c"
                       },
-                      "example": [
-                        {
-                          "_id": "64724cba6666c49e972a846c"
-                        },
-                        {
-                          "phoneNumber": "+989394552776"
-                        },
-                        {
-                          "createdAt": "2023-05-27T18:32:26.660Z"
-                        },
-                        {
-                          "updatedAt": "2023-06-04T20:57:22.642Z"
-                        },
-                        {
-                          "__v": 0
-                        },
-                        {
-                          "address": {
-                            "postalAddress": "استان فارس - شهرستان فسا - بخش ششده و قره بلاا عبدی",
-                            "province": "البرز",
-                            "city": "چهارباغ",
-                            "plaque": "256",
-                            "recipient": {
-                              "firstName": "محمد",
-                              "lastName": "عبدی",
-                              "phoneNumber": "+989363658879"
-                            },
-                            "postalCode": "7466135566"
-                          }
-                        },
-                        {
-                          "firstName": "علی"
-                        },
-                        {
-                          "lastName": "عبدی"
+                      {
+                        "phoneNumber": "+989394552776"
+                      },
+                      {
+                        "createdAt": "2023-05-27T18:32:26.660Z"
+                      },
+                      {
+                        "updatedAt": "2023-06-04T20:57:22.642Z"
+                      },
+                      {
+                        "__v": 0
+                      },
+                      {
+                        "address": {
+                          "postalAddress": "استان فارس - شهرستان فسا - بخش ششده و قره بلاا عبدی",
+                          "province": "البرز",
+                          "city": "چهارباغ",
+                          "plaque": "256",
+                          "recipient": {
+                            "firstName": "محمد",
+                            "lastName": "عبدی",
+                            "phoneNumber": "+989363658879"
+                          },
+                          "postalCode": "7466135566"
                         }
-                      ]
-                    }
+                      },
+                      {
+                        "firstName": "علی"
+                      },
+                      {
+                        "lastName": "عبدی"
+                      }
+                    ]
                   }
                 }
               }
