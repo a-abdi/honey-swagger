@@ -1,0 +1,161 @@
+paths:
+  /product/productId/comment:
+    get:
+      description: show all comment that is verified for product
+      summary: show comment
+      tags:
+        - comment
+      servers:
+        - url: http://baseUrl
+      x-code-samples:
+        - lang: cURL
+          source: |
+            curl --location --request GET 'http://baseUrl/product/64704cd2b24eac4599451066/comment'
+        - lang: node.js
+          source: |
+            var request = require('request');
+            var options = {
+              'method': 'GET',
+              'url': 'http://baseUrl/product/64704cd2b24eac4599451066/comment',
+              'headers': {
+              }
+            };
+            request(options, function (error, response) {
+              if (error) throw new Error(error);
+              console.log(response.body);
+            });
+
+      parameters:
+        - name: productId
+          in: path
+          description: product id
+          required: true
+          type: string
+
+      responses:
+        "201":
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "درخواست انجام شد"
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        _id: 
+                          type: string
+                          description: product id
+                        comments: 
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              _id: 
+                                type: string
+                              title: 
+                                type: string
+                              text: 
+                                type: string
+                              user: 
+                                type: object
+                                properties:
+                                  fullName: 
+                                    type: string
+                                  id: 
+                                    type: string
+                                  buyer: 
+                                    type: boolean
+                              verify:
+                                type: boolean
+                              score: 
+                                type: string
+                              produc: 
+                                type: string
+                              createdAt: 
+                                type: string
+                              updatedAt: 
+                                type: string
+                              __v: 
+                                type: intiger
+                        scoreAverage: 
+                          type: intiger
+                        totalCount: 
+                          type: intiger
+                    example: [
+                        {
+                            "_id": "64704cd2b24eac4599451066",
+                            "comments": [
+                                {
+                                    "_id": "64831600ccb783f358a5c6d2",
+                                    "title": "drfd",
+                                    "text": "sedwd",
+                                    "user": {
+                                        "fullName": "علی عبدی",
+                                        "id": "64724cba6666c49e972a846c",
+                                        "buyer": true
+                                    },
+                                    "verify": true,
+                                    "score": 1,
+                                    "product": "64704cd2b24eac4599451066",
+                                    "createdAt": "2023-06-09T12:07:28.731Z",
+                                    "updatedAt": "2023-06-09T12:07:28.731Z",
+                                    "__v": 0
+                                },
+                                {
+                                    "_id": "6485aae236626363b35f6349",
+                                    "title": "g",
+                                    "text": "خوب",
+                                    "user": {
+                                        "fullName": "علی عبدی",
+                                        "id": "64724cba6666c49e972a846c",
+                                        "buyer": true
+                                    },
+                                    "verify": true,
+                                    "score": 5,
+                                    "product": "64704cd2b24eac4599451066",
+                                    "createdAt": "2023-06-11T11:07:14.983Z",
+                                    "updatedAt": "2023-06-11T14:17:58.535Z",
+                                    "__v": 0
+                                }
+                            ],
+                            "scoreAverage": 3,
+                            "totalCount": 2
+                        }
+                    ]                   
+
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "Not Found"
+                  message:
+                    type: string
+                    example: "Cannot Patch /invalid-address"
+                  statusCode: 
+                    type: string
+                    example: 404
+        "500":
+          description: Internet Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Internal server error"
+                  statusCode: 
+                    type: string
+                    example: 500
+
