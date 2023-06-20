@@ -2881,6 +2881,320 @@
         }
       }
     },
+    "/orders/:id": {
+      "get": {
+        "description": "get one order by admin",
+        "summary": "get one orders",
+        "tags": [
+          "order"
+        ],
+        "servers": [
+          {
+            "url": "http://baseUrl"
+          }
+        ],
+        "x-code-samples": [
+          {
+            "lang": "cURL",
+            "source": "curl --location --request GET 'http://baseUrl/orders/64803951d4a06ddbcb93130f' \\\n--header 'Authorization: Bearer eyJhbGciOi...'\n"
+          },
+          {
+            "lang": "node.js",
+            "source": "var request = require('request');\nvar options = {\n  'method': 'GET',\n  'url': 'http://baseUrl/orders/64803951d4a06ddbcb93130f',\n  'headers': {\n    'Authorization': 'Bearer eyJhbGciOi...'\n  }\n};\nrequest(options, function (error, response) {\n  if (error) throw new Error(error);\n  console.log(response.body);\n});\n"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "order id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "auth",
+            "in": "header",
+            "description": "an authorization header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "درخواست انجام شد"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "type": "string"
+                        },
+                        "__v": {
+                          "type": "number"
+                        },
+                        "user": {
+                          "type": "string"
+                        },
+                        "cart": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "product": {
+                                "type": "string"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "code": {
+                                "type": "string"
+                              },
+                              "imageSrc": {
+                                "type": "string"
+                              },
+                              "price": {
+                                "type": "intiger"
+                              },
+                              "discount": {
+                                "type": "intiger"
+                              },
+                              "quantity": {
+                                "type": "intiger"
+                              }
+                            }
+                          }
+                        },
+                        "amount": {
+                          "type": "intiger"
+                        },
+                        "status": {
+                          "type": "number"
+                        },
+                        "transaction": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            },
+                            "link": {
+                              "type": "string"
+                            },
+                            "cardNo": {
+                              "type": "string"
+                            },
+                            "error": {
+                              "type": "string"
+                            },
+                            "hashedCardNo": {
+                              "type": "string"
+                            },
+                            "status": {
+                              "type": "intiger"
+                            },
+                            "trackId": {
+                              "type": "intiger"
+                            },
+                            "transactionAmount": {
+                              "type": "intiger"
+                            },
+                            "transactionDate": {
+                              "type": "string"
+                            },
+                            "paymentAmount": {
+                              "type": "intiger"
+                            },
+                            "paymentDate": {
+                              "type": "string"
+                            },
+                            "paymentTrackId": {
+                              "type": "intiger"
+                            },
+                            "verifyDate": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      },
+                      "example": {
+                        "_id": "64803951d4a06ddbcb93130f",
+                        "user": "64724cba6666c49e972a846c",
+                        "cart": [
+                          {
+                            "product": "64704cd2b24eac4599451066",
+                            "name": "عسل کوهی",
+                            "code": "w90zxak8be",
+                            "imageSrc": "upload/product/1cfd4636-876c-469f-89fc-c14e42d5429e.jpeg",
+                            "price": 600000,
+                            "discount": 49000,
+                            "quantity": 3
+                          },
+                          {
+                            "product": "6471b896f3173f143a7c59b9",
+                            "name": "tt",
+                            "code": "bqlk0vwksa",
+                            "imageSrc": "upload/product/cd1d647a-64f8-42e3-aeaa-4d1a6066cad3.png",
+                            "price": 25,
+                            "discount": 0,
+                            "quantity": 9
+                          }
+                        ],
+                        "amount": 1653225,
+                        "status": 1,
+                        "createdAt": "2023-06-07T08:01:21.183Z",
+                        "updatedAt": "2023-06-16T12:09:44.585Z",
+                        "__v": 0,
+                        "transaction": {
+                          "id": "39ffbc3555b7f1a601c1676b5ab565cd",
+                          "link": "https://idpay.ir/p/ws-sandbox/39ffbc3555b7f1a601c1676b5ab565cd",
+                          "cardNo": "123456******1234",
+                          "error": null,
+                          "hashedCardNo": "E59FA6241C94B8836E3D03120DF33E80FD988888BBA0A122240C2E7D23B48295",
+                          "status": 100,
+                          "trackId": 1222193,
+                          "transactionAmount": 16532250,
+                          "transactionDate": "1970-01-20T12:22:04.881Z",
+                          "paymentAmount": 16532250,
+                          "paymentDate": "1970-01-20T12:22:04.881Z",
+                          "paymentTrackId": "94416325",
+                          "verifyDate": "1970-01-20T12:22:04.886Z"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "example": [
+                        "شناسه به درستی وارد نشده است"
+                      ]
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "example": "bad request"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unauthorized"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 401
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Forbidden resource"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 403
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Not Found"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Cannot Patch /invalid-address"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 404
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internet Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Internal server error"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 500
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/orders": {
       "get": {
         "description": "get orders by admin",
