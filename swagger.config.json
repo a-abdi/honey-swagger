@@ -33,7 +33,8 @@
         "users",
         "carts",
         "payment",
-        "properties"
+        "properties",
+        "order"
       ]
     }
   ]
