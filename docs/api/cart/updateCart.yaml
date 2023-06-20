@@ -1,37 +1,37 @@
 paths:
-  /categories/:id:
+  /carts/products/:id:
     patch:
-      description: Admin update one categgory
-      summary: update category
+      description: User update cart
+      summary: User update cart
       tags:
-        - categories
+        - carts
       servers:
         - url: http://baseUrl
       x-code-samples:
         - lang: cURL
           source: |
-            curl --location --request PATCH 'http://baseUrl/categories/646fa78d8bfe8d1617ab556b' \
-            --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9........' \
+            curl --location --request PATCH 'http://lbaseUrl/carts/products/64704cd2b24eac4599451066' \
+            --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiI...' \
             --header 'Content-Type: application/json' \
             --data-raw '{
-                "name": "عسل",
-                "createdAt": "2024-01-25T07:41:10.921Z",
-                "__v": 2
+                "product": {
+                    "quantity": 65
+                }
             }'
         - lang: node.js
           source: |
             var request = require('request');
             var options = {
               'method': 'PATCH',
-              'url': 'http://baseUrl/categories/646fa78d8bfe8d1617ab556b',
+              'url': 'http://lbaseUrl/carts/products/64704cd2b24eac4599451066',
               'headers': {
-                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9........',
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiI...',
                 'Content-Type': 'application/json'
               },
               body: JSON.stringify({
-                "name": "عسل",
-                "createdAt": "2024-01-25T07:41:10.921Z",
-                "__v": 2
+                "product": {
+                  "quantity": 65
+                }
               })
 
             };
@@ -43,7 +43,7 @@ paths:
       parameters:
         - name: id
           in: path
-          description: category id
+          description: product id
           required: true
           type: string
 
@@ -58,19 +58,13 @@ paths:
           application/json:
             schema: 
               type: object
-              properties: 
-                name:
+              properties:
+                quantity:
+                  type: intiger
+                  example: 20
+                _id:
                   type: string
-                  example: لوازم زنبور داری
-                description:
-                  type: string
-                  example: وسایل مورد نیاز در زنبورداری بسیار متنوع می باشند که بسته به مرحله زنبورداری متفاوت است.
-                properties:
-                  type: array
-                  description: list property for category
-                  items:
-                    type: string
-                  example: ["6468b16b801b654457284967"]
+                  example: "6468b16b801b654457284967"
 
       responses:
         "200":
@@ -88,31 +82,38 @@ paths:
                     properties:
                       _id:
                         type: string
-                      name:
+                      user:
                         type: string
-                      description:
-                        type: string
-                      properties: 
+                        # description: user id
+                      products: 
                         type: array
                         items: 
-                          type: string
+                          type: obejct
+                          properties:
+                            quantity:
+                              type: intiger
+                            product:
+                              type: string
                       createdAt:
                         type: string
                       updatedAt:
                         type: string
                       __v: 
-                        type: number
+                        type: intiger
                     example:  {
-                      "_id": "64904fa356a4782b667dccad",
-                      "name": "book",
-                      "description": "this is book category",
-                      "properties": [
-                          "6468b16b801b654457284967"
+                      "_id": "648b01eaa1aeb17a2a89d64f",
+                      "user": "64724cba6666c49e972a846c",
+                      "__v": 0,
+                      "createdAt": "2023-06-15T12:19:54.642Z",
+                      "products": [
+                        {
+                          "quantity": 65,
+                          "product": "64704cd2b24eac4599451066"
+                        }
                       ],
-                      "createdAt": "2023-06-19T12:52:51.023Z",
-                      "updatedAt": "2023-06-19T12:52:51.023Z",
-                      "__v": 0
+                      "updatedAt": "2023-06-20T06:39:08.831Z"
                     }
+                    
         "400":
           description: Bad Request
           content:
@@ -125,7 +126,7 @@ paths:
                     items:
                       type: string
                     example: [
-                        "نام در سیستم وجود دارد"
+                      "شناسه به درستی وارد نشده است",
                     ]
                   statusCode: 
                     type: string
@@ -174,7 +175,7 @@ paths:
                     example: "Not Found"
                   message:
                     type: string
-                    example: "Cannot Patch /admins/xxxxxxxxxxx"
+                    example: "Cannot Patch /invalid-address"
                   statusCode: 
                     type: string
                     example: 404
