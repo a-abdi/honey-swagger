@@ -32,7 +32,8 @@
         "products",
         "users",
         "carts",
-        "payment"
+        "payment",
+        "properties"
       ]
     }
   ]
