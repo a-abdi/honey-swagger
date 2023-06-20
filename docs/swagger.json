@@ -1321,6 +1321,175 @@
       }
     },
     "/carts/products/:id": {
+      "delete": {
+        "description": "User delete product from cart",
+        "summary": "User delete cart",
+        "tags": [
+          "carts"
+        ],
+        "servers": [
+          {
+            "url": "http://baseUrl"
+          }
+        ],
+        "x-code-samples": [
+          {
+            "lang": "cURL",
+            "source": "curl --location --request DELETE 'http://baseUrl/carts/products/64704cd2b24eac4599451066' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiI...'\n"
+          },
+          {
+            "lang": "node.js",
+            "source": "var request = require('request');\nvar options = {\n  'method': 'DELETE',\n  'url': 'http://baseUrl/carts/products/64704cd2b24eac4599451066',\n  'headers': {\n    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiI...'\n  }\n};\nrequest(options, function (error, response) {\n  if (error) throw new Error(error);\n  console.log(response.body);\n});\n"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "product id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "auth",
+            "in": "header",
+            "description": "an authorization header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "درخواست انجام شد"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "example": [
+                        "شناسه به درستی وارد نشده است"
+                      ]
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "example": "bad request"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unauthorized"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 401
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Forbidden resource"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 403
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Not Found"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Cannot Patch /invalid-address"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 404
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internet Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Internal server error"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 500
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "patch": {
         "description": "User update cart",
         "summary": "User update cart",
