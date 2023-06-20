@@ -2881,6 +2881,344 @@
         }
       }
     },
+    "/orders": {
+      "get": {
+        "description": "get orders by admin",
+        "summary": "get orders",
+        "tags": [
+          "order"
+        ],
+        "servers": [
+          {
+            "url": "http://baseUrl"
+          }
+        ],
+        "x-code-samples": [
+          {
+            "lang": "cURL",
+            "source": "curl --location --request GET 'http://baseUrl/orders?status=1' \\\n--header 'Authorization: Bearer eyJhbGciOi...'\n"
+          },
+          {
+            "lang": "node.js",
+            "source": "var request = require('request');\nvar options = {\n  'method': 'GET',\n  'url': 'http://baseUrl/orders?status=1',\n  'headers': {\n    'Authorization': 'Bearer eyJhbGciOi...'\n  }\n};\nrequest(options, function (error, response) {\n  if (error) throw new Error(error);\n  console.log(response.body);\n});\n"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "description": "admin filter orders by status",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "auth",
+            "in": "header",
+            "description": "an authorization header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "درخواست انجام شد"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string"
+                          },
+                          "createdAt": {
+                            "type": "string"
+                          },
+                          "updatedAt": {
+                            "type": "string"
+                          },
+                          "__v": {
+                            "type": "number"
+                          },
+                          "user": {
+                            "type": "string"
+                          },
+                          "cart": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "product": {
+                                  "type": "string"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "code": {
+                                  "type": "string"
+                                },
+                                "imageSrc": {
+                                  "type": "string"
+                                },
+                                "price": {
+                                  "type": "intiger"
+                                },
+                                "discount": {
+                                  "type": "intiger"
+                                },
+                                "quantity": {
+                                  "type": "intiger"
+                                }
+                              }
+                            }
+                          },
+                          "amount": {
+                            "type": "intiger"
+                          },
+                          "status": {
+                            "type": "number"
+                          },
+                          "transaction": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "link": {
+                                "type": "string"
+                              },
+                              "cardNo": {
+                                "type": "string"
+                              },
+                              "error": {
+                                "type": "string"
+                              },
+                              "hashedCardNo": {
+                                "type": "string"
+                              },
+                              "status": {
+                                "type": "intiger"
+                              },
+                              "trackId": {
+                                "type": "intiger"
+                              },
+                              "transactionAmount": {
+                                "type": "intiger"
+                              },
+                              "transactionDate": {
+                                "type": "string"
+                              },
+                              "paymentAmount": {
+                                "type": "intiger"
+                              },
+                              "paymentDate": {
+                                "type": "string"
+                              },
+                              "paymentTrackId": {
+                                "type": "intiger"
+                              },
+                              "verifyDate": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "example": [
+                        {
+                          "_id": "64803951d4a06ddbcb93130f",
+                          "user": {
+                            "_id": "64724cba6666c49e972a846c",
+                            "phoneNumber": "+989394552776",
+                            "createdAt": "2023-05-27T18:32:26.660Z",
+                            "updatedAt": "2023-06-19T20:52:07.607Z",
+                            "__v": 0,
+                            "address": {
+                              "postalAddress": "sds sds sdss sdsd",
+                              "province": "فارس",
+                              "city": "فسا",
+                              "plaque": "1",
+                              "recipient": {
+                                "firstName": "محمد",
+                                "lastName": "عبدی",
+                                "phoneNumber": "+989394502418"
+                              },
+                              "postalCode": "6553698556"
+                            },
+                            "firstName": "علی",
+                            "lastName": "عبدی"
+                          },
+                          "cart": [
+                            {
+                              "product": "64704cd2b24eac4599451066",
+                              "name": "عسل کوهی",
+                              "code": "w90zxak8be",
+                              "imageSrc": "upload/product/1cfd4636-876c-469f-89fc-c14e42d5429e.jpeg",
+                              "price": 600000,
+                              "discount": 49000,
+                              "quantity": 3
+                            },
+                            {
+                              "product": "6471b896f3173f143a7c59b9",
+                              "name": "tt",
+                              "code": "bqlk0vwksa",
+                              "imageSrc": "upload/product/cd1d647a-64f8-42e3-aeaa-4d1a6066cad3.png",
+                              "price": 25,
+                              "discount": 0,
+                              "quantity": 9
+                            }
+                          ],
+                          "amount": 1653225,
+                          "orderId": "06c58b6c-3588-4341-9447-af4efa068418",
+                          "status": 1,
+                          "createdAt": "2023-06-07T08:01:21.183Z",
+                          "transaction": {
+                            "id": "39ffbc3555b7f1a601c1676b5ab565cd",
+                            "link": "https://idpay.ir/p/ws-sandbox/39ffbc3555b7f1a601c1676b5ab565cd",
+                            "cardNo": "123456******1234",
+                            "error": null,
+                            "hashedCardNo": "E59FA6241C94B8836E3D03120DF33E80FD988888BBA0A122240C2E7D23B48295",
+                            "status": 100,
+                            "trackId": 1222193,
+                            "transactionAmount": 16532250,
+                            "transactionDate": "1970-01-20T12:22:04.881Z",
+                            "paymentAmount": 16532250,
+                            "paymentDate": "1970-01-20T12:22:04.881Z",
+                            "paymentTrackId": "94416325",
+                            "verifyDate": "1970-01-20T12:22:04.886Z"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "example": [
+                        "وضعیت سفارش به درستی وارد نشده است"
+                      ]
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "example": "bad request"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unauthorized"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 401
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Forbidden resource"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 403
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Not Found"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Cannot Patch /invalid-address"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 404
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internet Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Internal server error"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 500
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/user/orders": {
       "get": {
         "description": "User get all orders",
@@ -2896,11 +3234,11 @@
         "x-code-samples": [
           {
             "lang": "cURL",
-            "source": "curl --location --request GET 'http://localhost:3000/user/orders' \\\n--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZU51bWJlciI6Iis5ODkzOTQ1NTI3NzYiLCJzdWIiOiI2NDcyNGNiYTY2NjZjNDllOTcyYTg0NmMiLCJyb2xlcyI6WyJ1c2VyIl0sImlhdCI6MTY4NzE3ODU0NSwiZXhwIjoxNjg3NDM3NzQ1fQ.P4V0OyuzSu9B7-HkZoIsEtJqWqduOpcf4wxVTXowqUU'\n"
+            "source": "curl --location --request GET 'http://basUrl/user/orders' \\\n--header 'Authorization: Bearer eyJhbGciOi...'\n"
           },
           {
             "lang": "node.js",
-            "source": "var request = require('request');\nvar options = {\n  'method': 'GET',\n  'url': 'http://localhost:3000/user/orders',\n  'headers': {\n    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZU51bWJlciI6Iis5ODkzOTQ1NTI3NzYiLCJzdWIiOiI2NDcyNGNiYTY2NjZjNDllOTcyYTg0NmMiLCJyb2xlcyI6WyJ1c2VyIl0sImlhdCI6MTY4NzE3ODU0NSwiZXhwIjoxNjg3NDM3NzQ1fQ.P4V0OyuzSu9B7-HkZoIsEtJqWqduOpcf4wxVTXowqUU'\n  }\n};\nrequest(options, function (error, response) {\n  if (error) throw new Error(error);\n  console.log(response.body);\n});\n"
+            "source": "var request = require('request');\nvar options = {\n  'method': 'GET',\n  'url': 'http://basUrl/user/orders',\n  'headers': {\n    'Authorization': 'Bearer eyJhbGciOi...'\n  }\n};\nrequest(options, function (error, response) {\n  if (error) throw new Error(error);\n  console.log(response.body);\n});\n"
           }
         ],
         "parameters": [
@@ -3034,7 +3372,7 @@
                               "product": "64704cd2b24eac4599451066",
                               "name": "عسل کوهی",
                               "code": "w90zxak8be",
-                              "imageSrc": "http://localhost:3000/upload/product/1cfd4636-876c-469f-89fc-c14e42d5429e.jpeg",
+                              "imageSrc": "http://basUrl/upload/product/1cfd4636-876c-469f-89fc-c14e42d5429e.jpeg",
                               "price": 600000,
                               "discount": 49000,
                               "quantity": 3
@@ -3043,7 +3381,7 @@
                               "product": "64803778cee36139e6931c9f",
                               "name": "عسل کوهی",
                               "code": "sicdiu",
-                              "imageSrc": "http://localhost:3000/upload/product/5fde8d55-a119-4d09-bedf-d988f7b447e9.jpeg",
+                              "imageSrc": "http://basUrl/upload/product/5fde8d55-a119-4d09-bedf-d988f7b447e9.jpeg",
                               "price": 5000,
                               "discount": 255,
                               "quantity": 2
@@ -3078,7 +3416,7 @@
                               "product": "6471fc4d308b2b0742331ef2",
                               "name": "do",
                               "code": "p0jfjzauxq",
-                              "imageSrc": "http://localhost:3000/upload/product/bb4a789a-98ed-4dc5-b0f6-bbe65c29e88b.jpg",
+                              "imageSrc": "http://basUrl/upload/product/bb4a789a-98ed-4dc5-b0f6-bbe65c29e88b.jpg",
                               "price": 1,
                               "discount": 0,
                               "quantity": 6
@@ -3087,7 +3425,7 @@
                               "product": "64803778cee36139e6931c9f",
                               "name": "عسل کوهی",
                               "code": "sicdiu",
-                              "imageSrc": "http://localhost:3000/upload/product/5fde8d55-a119-4d09-bedf-d988f7b447e9.jpeg",
+                              "imageSrc": "http://basUrl/upload/product/5fde8d55-a119-4d09-bedf-d988f7b447e9.jpeg",
                               "price": 5000,
                               "discount": 255,
                               "quantity": 3
@@ -3118,7 +3456,7 @@
                               "product": "64704cd2b24eac4599451066",
                               "name": "عسل کوهی",
                               "code": "w90zxak8be",
-                              "imageSrc": "http://localhost:3000/upload/product/1cfd4636-876c-469f-89fc-c14e42d5429e.jpeg",
+                              "imageSrc": "http://basUrl/upload/product/1cfd4636-876c-469f-89fc-c14e42d5429e.jpeg",
                               "price": 600000,
                               "discount": 49000,
                               "quantity": 3
@@ -3127,7 +3465,7 @@
                               "product": "6471b896f3173f143a7c59b9",
                               "name": "tt",
                               "code": "bqlk0vwksa",
-                              "imageSrc": "http://localhost:3000/upload/product/cd1d647a-64f8-42e3-aeaa-4d1a6066cad3.png",
+                              "imageSrc": "http://basUrl/upload/product/cd1d647a-64f8-42e3-aeaa-4d1a6066cad3.png",
                               "price": 25,
                               "discount": 0,
                               "quantity": 9
@@ -3162,7 +3500,7 @@
                               "product": "64704cd2b24eac4599451066",
                               "name": "عسل کوهی",
                               "code": "w90zxak8be",
-                              "imageSrc": "http://localhost:3000/upload/product/1cfd4636-876c-469f-89fc-c14e42d5429e.jpeg",
+                              "imageSrc": "http://basUrl/upload/product/1cfd4636-876c-469f-89fc-c14e42d5429e.jpeg",
                               "price": 600000,
                               "discount": 49000,
                               "quantity": 1
@@ -3182,7 +3520,7 @@
                               "product": "64704cd2b24eac4599451066",
                               "name": "عسل کوهی",
                               "code": "w90zxak8be",
-                              "imageSrc": "http://localhost:3000/upload/product/1cfd4636-876c-469f-89fc-c14e42d5429e.jpeg",
+                              "imageSrc": "http://basUrl/upload/product/1cfd4636-876c-469f-89fc-c14e42d5429e.jpeg",
                               "price": 600000,
                               "discount": 49000,
                               "quantity": 1
@@ -3213,7 +3551,7 @@
                               "product": "64704cd2b24eac4599451066",
                               "name": "عسل کوهی",
                               "code": "w90zxak8be",
-                              "imageSrc": "http://localhost:3000/upload/product/1cfd4636-876c-469f-89fc-c14e42d5429e.jpeg",
+                              "imageSrc": "http://basUrl/upload/product/1cfd4636-876c-469f-89fc-c14e42d5429e.jpeg",
                               "price": 600000,
                               "discount": 49000,
                               "quantity": 5
@@ -3222,7 +3560,7 @@
                               "product": "6484a921619fb32f1c5b1487",
                               "name": "do",
                               "code": "gvok7uj",
-                              "imageSrc": "http://localhost:3000/upload/product/3b6fb2fe-4854-4e3e-a5a4-70347da5880d.png",
+                              "imageSrc": "http://basUrl/upload/product/3b6fb2fe-4854-4e3e-a5a4-70347da5880d.png",
                               "price": 5520,
                               "discount": 0,
                               "quantity": 2
@@ -3257,7 +3595,7 @@
                               "product": "64704cd2b24eac4599451066",
                               "name": "عسل کوهی",
                               "code": "w90zxak8be",
-                              "imageSrc": "http://localhost:3000/upload/product/1cfd4636-876c-469f-89fc-c14e42d5429e.jpeg",
+                              "imageSrc": "http://basUrl/upload/product/1cfd4636-876c-469f-89fc-c14e42d5429e.jpeg",
                               "price": 600000,
                               "discount": 49000,
                               "quantity": 4
@@ -3288,7 +3626,7 @@
                               "product": "64704cd2b24eac4599451066",
                               "name": "عسل کوهی",
                               "code": "w90zxak8be",
-                              "imageSrc": "http://localhost:3000/upload/product/1cfd4636-876c-469f-89fc-c14e42d5429e.jpeg",
+                              "imageSrc": "http://basUrl/upload/product/1cfd4636-876c-469f-89fc-c14e42d5429e.jpeg",
                               "price": 600000,
                               "discount": 49000,
                               "quantity": 10
