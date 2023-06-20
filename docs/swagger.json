@@ -31,7 +31,8 @@
         "carts",
         "payment",
         "properties",
-        "order"
+        "order",
+        "comment"
       ]
     }
   ],
@@ -2848,6 +2849,211 @@
                     "message": {
                       "type": "string",
                       "example": "Cannot Patch /admins/xxxxxxxxxxx"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 404
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internet Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Internal server error"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 500
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/productId/comment": {
+      "post": {
+        "description": "user can create comment for product",
+        "summary": "create comment",
+        "tags": [
+          "comment"
+        ],
+        "servers": [
+          {
+            "url": "http://baseUrl"
+          }
+        ],
+        "x-code-samples": [
+          {
+            "lang": "cURL",
+            "source": "curl --location --request POST 'http://baseUrl/product/64704cd2b24eac4599451066/comment' \\\n--header 'Authorization: Bearer eyJhbGciOiJI...' \\\n--header 'Content-Type: application/json' \\\n--data-raw '{\n    \"title\": \"عالی\",\n    \"text\": \"این دفعه کیفیتش خیلی خوب بود\",\n    \"score\": 4\n}'\n"
+          },
+          {
+            "lang": "node.js",
+            "source": "var request = require('request');\nvar options = {\n  'method': 'POST',\n  'url': 'http://baseUrl/product/64704cd2b24eac4599451066/comment',\n  'headers': {\n    'Authorization': 'Bearer eyJhbGciOiJI...',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    \"title\": \"عالی\",\n    \"text\": \"این دفعه کیفیتش خیلی خوب بود\",\n    \"score\": 4\n  })\n\n};\nrequest(options, function (error, response) {\n  if (error) throw new Error(error);\n  console.log(response.body);\n});\n"
+          }
+        ],
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "description": "product id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "auth",
+            "in": "header",
+            "description": "an authorization header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "text"
+                ],
+                "properties": {
+                  "score": {
+                    "type": "intiger",
+                    "enum": [
+                      1,
+                      2,
+                      3,
+                      4,
+                      5
+                    ],
+                    "example": 4
+                  },
+                  "title": {
+                    "type": "string",
+                    "example": "خوب"
+                  },
+                  "text": {
+                    "type": "string",
+                    "example": "این بار کیفیت خوب بود"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "درخواست انجام شد"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "example": [
+                        "متن باید به صورت حروف وارد شود",
+                        "متن نمی تواند خالی باشد"
+                      ]
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "example": "bad request"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unauthorized"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 401
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Forbidden resource"
+                    },
+                    "statusCode": {
+                      "type": "string",
+                      "example": 403
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "Not Found"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Cannot Patch /invalid-address"
                     },
                     "statusCode": {
                       "type": "string",

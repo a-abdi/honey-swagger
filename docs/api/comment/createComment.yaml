@@ -1,0 +1,166 @@
+paths:
+  /product/productId/comment:
+    post:
+      description: user can create comment for product
+      summary: create comment
+      tags:
+        - comment
+      servers:
+        - url: http://baseUrl
+      x-code-samples:
+        - lang: cURL
+          source: |
+            curl --location --request POST 'http://baseUrl/product/64704cd2b24eac4599451066/comment' \
+            --header 'Authorization: Bearer eyJhbGciOiJI...' \
+            --header 'Content-Type: application/json' \
+            --data-raw '{
+                "title": "عالی",
+                "text": "این دفعه کیفیتش خیلی خوب بود",
+                "score": 4
+            }'
+        - lang: node.js
+          source: |
+            var request = require('request');
+            var options = {
+              'method': 'POST',
+              'url': 'http://baseUrl/product/64704cd2b24eac4599451066/comment',
+              'headers': {
+                'Authorization': 'Bearer eyJhbGciOiJI...',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                "title": "عالی",
+                "text": "این دفعه کیفیتش خیلی خوب بود",
+                "score": 4
+              })
+
+            };
+            request(options, function (error, response) {
+              if (error) throw new Error(error);
+              console.log(response.body);
+            });
+
+      parameters:
+        - name: productId
+          in: path
+          description: product id
+          required: true
+          type: string
+
+        - name: auth
+          in: header
+          description: an authorization header
+          required: true
+          type: string
+
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              type: object
+              required:
+                  - text
+              properties: 
+                score:
+                  type: intiger
+                  enum: [1, 2, 3, 4, 5]
+                  example: 4
+                title:
+                  type: string
+                  example: خوب
+                text:
+                  type: string
+                  example: "این بار کیفیت خوب بود"
+
+      responses:
+        "201":
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "درخواست انجام شد"
+                    
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: array
+                    items:
+                      type: string
+                    example: [
+                      "متن باید به صورت حروف وارد شود",
+                      "متن نمی تواند خالی باشد"
+                    ]
+                  statusCode: 
+                    type: string
+                    example: 400
+                  error:
+                    type: string
+                    example: bad request
+
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Unauthorized"
+                  statusCode: 
+                    type: string
+                    example: 401
+        
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Forbidden resource"
+                  statusCode: 
+                    type: string
+                    example: 403
+
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "Not Found"
+                  message:
+                    type: string
+                    example: "Cannot Patch /invalid-address"
+                  statusCode: 
+                    type: string
+                    example: 404
+        "500":
+          description: Internet Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Internal server error"
+                  statusCode: 
+                    type: string
+                    example: 500
+

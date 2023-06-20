@@ -34,7 +34,8 @@
         "carts",
         "payment",
         "properties",
-        "order"
+        "order",
+        "comment"
       ]
     }
   ]
