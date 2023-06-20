@@ -31,7 +31,8 @@
         "categories",
         "products",
         "users",
-        "carts"
+        "carts",
+        "payment"
       ]
     }
   ]
