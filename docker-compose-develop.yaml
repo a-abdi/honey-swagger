@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  develop:
+    build: .
+    container_name: swagger-develop
+    network_mode: "host"
+    ports:
+      - 2000:2000
+    restart: always
+
+  

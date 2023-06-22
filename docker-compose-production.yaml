@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  swagger:
+    container_name: swagger-production
+    image: aliabdi709/honey-swagger:0.0.1
+    network_mode: "host"
+    ports:
+      - 2000:2000
+    restart: always
+  
