@@ -8,11 +8,11 @@
 ## General info
 #### Swagger Demo: [http://5.75.202.22:2000/docs/]( http://5.75.202.22:2000/docs/)
 
-#### Backend Repo: [Honey Store Backend](https://github.com/a-abdi/honey-store-backend)
+#### Backend Repo: [https://github.com/a-abdi/honey-store-backend](https://github.com/a-abdi/honey-store-backend)
 
 ## Setup
 ### To run this project:
-#### Choose one of the three options below to run the projec.
+#### Choose one of the three options below to run the project.
 * run with docker-compose develop version
 ```
 $ docker-compose -f docker-compose-develop.yaml up --build -d
